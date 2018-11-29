@@ -2,10 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
+
 class App extends React.Component {
+	componentDidMount() {
+	    fetch('api/test')
+	      .then(response => response.json())
+	      .then(data => console.log(data));
+  	}
+
     render() {
         return (
-            <div>HI MAX!</div>
+            <div>HELLOOOOSAM!</div>
         );
     }
 }

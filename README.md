@@ -1,4 +1,12 @@
-# Capstone
+# Wiki for Lucky7 Capstone
+
+# Components
+
+# Build Environment
+
+We are using Travis CI to build and test our software, here is the link to our most recent build: 
+
+# Additional Notes
 
 Ontology notes:
 Categories can be grouped into Groupings which can then then be Classified.

@@ -5,6 +5,7 @@
 # Build Environment
 
 We are using Travis CI to build and test our software, here is the link to our most recent build: 
+https://travis-ci.com/kyle-maxwell/Lucky7-Capstone
 
 # Additional Notes
 

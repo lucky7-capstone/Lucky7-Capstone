@@ -24,6 +24,7 @@ Data Clustering Metrics:
 2. Data Entry Length
 3. Data Entry Information Entropy
 4. 1-D Bidirectional ConvNet for pattern embedding
+5. Siamese Neural Network with Tripplet Loss
 
 
 ## Run Locally

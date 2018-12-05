@@ -1,6 +1,21 @@
 # Wiki for Lucky7 Capstone
 
+
+## Run Locally
+
+1. npm install
+2. npm run dev
+3. pip install -r requirements.txt
+4. python server.py
+5. Goto http://localhost:3000
+
+If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
+
+If changes aren't appearing on the webpage try using 'CTRL+SHIFT+R' to refresh the page.
+(Thanks https://github.com/jwkvam/minimal-flask-react)
+
 # Components
+
 
 # Build Environment
 
@@ -27,16 +42,3 @@ Data Clustering Metrics:
 5. Siamese Neural Network with Tripplet Loss
 
 
-## Run Locally
-
-1. npm install
-2. npm run dev
-3. pip install -r requirements.txt
-4. python server.py
-5. Goto http://localhost:3000
-
-If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
-
-If changes aren't appearing on the webpage try using 'CTRL+SHIFT+R' to refresh the page.
-
-(Thanks https://github.com/jwkvam/minimal-flask-react)

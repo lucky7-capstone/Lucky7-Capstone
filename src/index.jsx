@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 
 
@@ -12,7 +15,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>HELLOOOOSAM!</div>
+            <List component="nav">
+              <ListItem button key="1">
+                <ListItemText primary="TEST"/>
+              </ListItem>
+              <ListItem button key="2">
+                <ListItemText primary="WOW"/>
+              </ListItem>
+              <ListItem button key="3">
+                <ListItemText primary="COOL"/>
+              </ListItem>
+          </List>
         );
     }
 }

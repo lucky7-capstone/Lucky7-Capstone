@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-
+import Dashboard from './Dashboard.jsx';
 
 class App extends React.Component {
 	componentDidMount() {
@@ -15,17 +15,13 @@ class App extends React.Component {
 
     render() {
         return (
-            <List component="nav">
-              <ListItem button key="1">
-                <ListItemText primary="TEST"/>
-              </ListItem>
-              <ListItem button key="2">
-                <ListItemText primary="WOW"/>
-              </ListItem>
-              <ListItem button key="3">
-                <ListItemText primary="COOL"/>
-              </ListItem>
-          </List>
+
+            <React.Fragment>
+
+                <Dashboard />
+
+            </React.Fragment>
+
         );
     }
 }

@@ -36,9 +36,8 @@ Field Clustering Metrics:
 
 Data Clustering Metrics:
 1. Averaged Trigram Similarty of multiple data entries
-2. Data Entry Length
-3. Data Entry Information Entropy
-4. 1-D Bidirectional ConvNet for pattern embedding
+2. Data Entry Information Entropy & Metadata
+3. 1-D Bidirectional ConvNet for pattern embedding
 
 Siamese Neural Network with Tripplet Loss
 

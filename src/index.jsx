@@ -17,9 +17,7 @@ class App extends React.Component {
         return (
 
             <React.Fragment>
-
                 <Dashboard />
-
             </React.Fragment>
 
         );

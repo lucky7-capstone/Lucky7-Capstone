@@ -19,6 +19,11 @@ import { mainListItems, secondaryListItems } from './listItems.jsx';
 import SimpleLineChart from './SimpleLineChart.jsx';
 import SimpleTable from './SimpleTable.jsx';
 
+import Grid from '@material-ui/core/Grid';
+import Classes from './Classes.jsx'
+import Fields from './Fields.jsx'
+
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -169,21 +174,41 @@ class Dashboard extends React.Component {
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
+
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
+
+          <Grid container className="verify_view" justify="center" spacing={16}>
+            <Grid key="1" xs="3" item>
+              <Classes values={["class", "class", "class", "class", "class"]} />
+            </Grid>
+            <Grid key="1" xs="3" item>
+              <Fields values={["field", "field", "field", "field", "field"]} />
+            </Grid>
+            <Grid key="1" xs="6" item>
+              <img src="https://i1.rgstatic.net/ii/profile.image/337767809732610-1457541529558_Q128/Bruno_Da_Silva3.jpg" alt="Italian Trulli" />
+            </Grid>
+          </Grid>
+
           <Typography variant="h4" gutterBottom component="h2">
             Orders
           </Typography>
+
           <Typography component="div" className={classes.chartContainer}>
             <SimpleLineChart />
           </Typography>
+
           <Typography variant="h4" gutterBottom component="h2">
             Products
           </Typography>
+
           <div className={classes.tableContainer}>
             <SimpleTable />
           </div>
+
+
         </main>
+
       </div>
     );
   }

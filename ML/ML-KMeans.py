@@ -1,4 +1,5 @@
 import sys
+import json
 import numpy as np
 import pandas as pd
 from similarity.normalized_levenshtein import NormalizedLevenshtein
@@ -21,13 +22,22 @@ def main():
 	clusters = 4
 	kmeans = KMeans(n_clusters=clusters, random_state=0).fit(vectors)
 
+	uncert = pd.DataFrame()
 	for i in range(clusters):
-	    print("Cluster " + str(i) + ":")
-	    print("Mean Dist to Centroid: ")
-	    print(mean_dist(vectors[kmeans.labels_==i], 
-	                    kmeans.cluster_centers_[i]))
-	    print(pd.Series(arr1[kmeans.labels_==i]))
-	    print('\n')
+	    uncert[i] = vectors.apply(dist, args=(kmeans.cluster_centers_[i], ), axis=0)
+	uncert = uncert.set_index(arr1)
+
+
+	data = {}
+	for i in range(clusters):
+	    cluster = {}
+	    fields = pd.Series(arr1[kmeans.labels_==i])
+	    for field in fields:
+	        cluster[field] = uncert.loc[field][i]
+	    data["Cluster " + str(i)] = cluster
+
+	print(json.dumps(data, sort_keys=True, indent=4))
+
 
 
 def dist(x, y): # computationally effcient equclidean distance

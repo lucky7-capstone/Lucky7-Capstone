@@ -28,17 +28,17 @@ Ontology notes:
 Categories can be grouped into Groupings which can then then be Classified.
 
 
-# Metrics for Clustering
+# Machine Learning 
 
-Category Clustering Metrics:
+Field Clustering Metrics:
 1. Levenshtein Distance for Field Names
 2. GloVe Word embeddings of Field Names
 
 Data Clustering Metrics:
 1. Averaged Trigram Similarty of multiple data entries
-2. Data Entry Length
-3. Data Entry Information Entropy
-4. 1-D Bidirectional ConvNet for pattern embedding
-5. Siamese Neural Network with Tripplet Loss
+2. Data Entry Information Entropy & Metadata
+3. 1-D Bidirectional ConvNet for pattern embedding
+
+Siamese Neural Network with Tripplet Loss
 
 

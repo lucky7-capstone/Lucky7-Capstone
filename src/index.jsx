@@ -7,12 +7,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Dashboard from './Dashboard.jsx';
 
 class App extends React.Component {
+  
 	componentDidMount() {
 	    fetch('api/test')
 	      .then(response => response.json())
 	      .then(data => console.log(data));
   	}
-
+  
     render() {
         return (
 

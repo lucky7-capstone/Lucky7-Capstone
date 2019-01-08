@@ -104,6 +104,7 @@ const styles = theme => ({
 });
 
 class Dashboard extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -139,7 +140,7 @@ class Dashboard extends React.Component {
                 this.state.open && classes.menuButtonHidden,
               )}
             >
-              <MenuIcon />
+            <MenuIcon />
             </IconButton>
             <Typography
               component="h1"
@@ -175,6 +176,8 @@ class Dashboard extends React.Component {
           <List>{secondaryListItems}</List>
         </Drawer>
 
+        
+
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
 
@@ -193,7 +196,6 @@ class Dashboard extends React.Component {
           <Typography variant="h4" gutterBottom component="h2">
             Orders
           </Typography>
-
           <Typography component="div" className={classes.chartContainer}>
             <SimpleLineChart />
           </Typography>
@@ -201,7 +203,6 @@ class Dashboard extends React.Component {
           <Typography variant="h4" gutterBottom component="h2">
             Products
           </Typography>
-
           <div className={classes.tableContainer}>
             <SimpleTable />
           </div>

@@ -149,7 +149,6 @@ class Dashboard extends React.Component {
             </IconButton>
             <Typography
               component="h1"
-              variant="h6"
               color="inherit"
               noWrap
               className={classes.title}
@@ -182,10 +181,9 @@ class Dashboard extends React.Component {
         </Drawer>
 
         <main>
-          <UploadPage />
+         <div className={classes.appBarSpacer} />
+          <MainPage />
         </main>
-
-
       </div>
     );
   }

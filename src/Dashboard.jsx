@@ -183,7 +183,7 @@ class Dashboard extends React.Component {
 
         <main>
          <div className={classes.appBarSpacer} />
-          <UploadPage />
+          <UploadPage  />
         </main>
 
 

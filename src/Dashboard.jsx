@@ -23,6 +23,7 @@ import Grid from '@material-ui/core/Grid';
 import Classes from './Classes.jsx'
 import Fields from './Fields.jsx'
 import MainPage from './MainPage.jsx'
+import UploadPage from './UploadPage.jsx'
 
 
 const drawerWidth = 240;
@@ -181,7 +182,7 @@ class Dashboard extends React.Component {
         </Drawer>
 
         <main>
-          <MainPage />
+          <UploadPage />
         </main>
 
 

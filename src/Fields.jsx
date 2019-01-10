@@ -10,7 +10,7 @@ class Fields extends React.Component {
 	    	<h1>Fields</h1>
 	        <List component="nav">
 	          	{this.props.values.map(value => (
-	            	<ListItem button key="1">
+	            	<ListItem button key={value}>
 	              		<ListItemText primary={value}/>
 	            	</ListItem>
 	     		))}

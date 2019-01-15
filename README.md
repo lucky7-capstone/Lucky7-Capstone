@@ -8,8 +8,9 @@
 3. pip3 install -r requirements.txt
 4. python3 server.py
 5. Go to http://localhost:3000
+6. Use 'CTRL+SHIFT+R'
 
-Use 'CTRL+SHIFT+R' to refresh the page!
+Use 'CTRL+SHIFT+R' to refresh the page after making changes.
 
 (Thanks https://github.com/jwkvam/minimal-flask-react)
 

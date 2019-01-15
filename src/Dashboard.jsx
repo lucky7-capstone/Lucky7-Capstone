@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,15 +13,24 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
-import { mainListItems, secondaryListItems } from './listItems.jsx';
+import { withStyles } from '@material-ui/core/styles';
 import SimpleLineChart from './SimpleLineChart.jsx';
 import SimpleTable from './SimpleTable.jsx';
-
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import Grid from '@material-ui/core/Grid';
 import Classes from './Classes.jsx'
 import Fields from './Fields.jsx'
-
+import MainPage from './MainPage.jsx'
+import UploadPage from './UploadPage.jsx'
 
 const drawerWidth = 240;
 
@@ -101,7 +109,12 @@ const styles = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+  h6: {
+    marginBottom: theme.spacing.unit * 2,
+  }
 });
+
+
 
 class Dashboard extends React.Component {
 
@@ -109,6 +122,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       open : true,
+      page : "upload",
     };
   }
   
@@ -144,7 +158,7 @@ class Dashboard extends React.Component {
             </IconButton>
             <Typography
               component="h1"
-              variant="h6"
+              variant="title"
               color="inherit"
               noWrap
               className={classes.title}
@@ -171,50 +185,67 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>
+            <div>
+              <ListItem button>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Upload" onClick={() => this.setState({ page : "upload"} )}/>
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <LayersIcon />
+                </ListItemIcon>
+                <ListItemText primary="Analysis" onClick={() => this.setState({ page : "analysis"} )}/>
+              </ListItem>
+            </div>
+          </List>
           <Divider />
-          <List>{secondaryListItems}</List>
+          <List>
+            <div>
+              <ListSubheader inset>Saved Ontologies</ListSubheader>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology A" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology B" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology C" />
+              </ListItem>
+            </div>  
+          </List>
         </Drawer>
 
-        
-
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-
-          <Grid container className="verify_view" justify="center" spacing={16}>
-            <Grid key="1" xs="3" item>
-              <Classes values={["class", "class", "class", "class", "class"]} />
-            </Grid>
-            <Grid key="1" xs="3" item>
-              <Fields values={["field", "field", "field", "field", "field"]} />
-            </Grid>
-            <Grid key="1" xs="6" item>
-              <img src="https://i1.rgstatic.net/ii/profile.image/337767809732610-1457541529558_Q128/Bruno_Da_Silva3.jpg" alt="Italian Trulli" />
-            </Grid>
-          </Grid>
-
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
-          </Typography>
-
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-          </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
-
-
+        <main>
+         <div className={classes.appBarSpacer} />
+         {this.state.page == "upload" && <UploadPage  />}
+         {this.state.page == "analysis" &&  <MainPage  />}
         </main>
+
 
       </div>
     );
   }
 
 }
+
 
 Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,

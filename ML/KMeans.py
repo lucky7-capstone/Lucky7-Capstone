@@ -6,13 +6,7 @@ from similarity.normalized_levenshtein import NormalizedLevenshtein
 from sklearn.cluster import KMeans
 
 
-def main():
-	if (len(sys.argv) != 2):
-		print("Usage: python ML-KMeans.py path-name")
-		sys.exit()
-	path = sys.argv[1] # "../ames/test.csv"
-
-	df = pd.read_csv(path)
+def data_classifier(df):
 	arr1 = df.columns.values
 	arr2 = df.columns.values
 
@@ -36,8 +30,7 @@ def main():
 	        cluster[field] = uncert.loc[field][i]
 	    data["Cluster " + str(i)] = cluster
 
-	print(json.dumps(data, sort_keys=True, indent=4))
-
+	return(json.dumps(data, sort_keys=True, indent=4))
 
 
 def dist(x, y): # computationally effcient equclidean distance
@@ -46,8 +39,3 @@ def dist(x, y): # computationally effcient equclidean distance
 def mean_dist(DF, X):
     dists = DF.apply(dist, args=(X, ), axis=1)
     return dists.mean()
-
-
-
-if __name__ == "__main__":
-    main()

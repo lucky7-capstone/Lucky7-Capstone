@@ -19,7 +19,7 @@ class UploadPage extends Component{
 	      body: data,
 	    }).then((response) => {
 	      response.json().then((body) => {
-	        console.log(body);
+	        this.props.handleData(body);
 	      });
 	    });
 	}

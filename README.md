@@ -11,7 +11,7 @@
 
 If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
 
-If changes aren't appearing on the webpage try using 'CTRL+SHIFT+R' to refresh the page.
+Use 'CTRL+SHIFT+R' to refresh the page!
 (Thanks https://github.com/jwkvam/minimal-flask-react)
 
 # Components

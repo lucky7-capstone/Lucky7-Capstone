@@ -1,28 +1,45 @@
-
 import React, {Component} from 'react'
-import {DropzoneArea} from 'material-ui-dropzone'
+import MainPage from './MainPage.jsx'
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 
 class UploadPage extends Component{
+	constructor(props) {
+    	super(props);
+    	this.handleUploadImage = this.handleUploadImage.bind(this);
+  	}
 
-  constructor(props){
-    super(props);
-    this.state = {
-      files: []
-    };
-  }
-  handleChange(files){
-    this.setState({
-      files: files
-    });
-  }
-  render(){
-    return (
+	handleUploadImage(ev) {
+	    ev.preventDefault();
 
-      	<DropzoneArea 
-        	onChange={this.handleChange.bind(this)}
-        />
-    )  
-  }
+	    const data = new FormData();
+	    data.append('file', this.uploadInput.files[0]);
+	    fetch('api/upload', {
+	      method: 'POST',
+	      body: data,
+	    }).then((response) => {
+	      response.json().then((body) => {
+	        console.log(body);
+	      });
+	    });
+	}
+
+  	render() {
+	    return (
+	    	<div align={"center"}>
+	    	  Choose a csv file to analyze
+		      <form onSubmit={this.handleUploadImage}>
+		        <Button>
+		          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+		        </Button>
+		        <br />
+		        <div>
+		          <button>Upload</button>
+		        </div>
+		      </form>	
+	     	</div>
+	    );
+  	}
 } 
 
 

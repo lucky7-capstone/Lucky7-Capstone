@@ -27,9 +27,9 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Grid from '@material-ui/core/Grid';
-import Classes from './Classes.jsx'
+import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
-import MainPage from './MainPage.jsx'
+import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
 
 const drawerWidth = 240;
@@ -236,7 +236,7 @@ class Dashboard extends React.Component {
         <main>
          <div className={classes.appBarSpacer} />
          {this.state.page == "upload" && <UploadPage  />}
-         {this.state.page == "analysis" &&  <MainPage  />}
+         {this.state.page == "analysis" &&  <AnalysisPage  />}
         </main>
 
 

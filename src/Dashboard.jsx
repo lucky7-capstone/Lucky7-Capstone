@@ -14,10 +14,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
-import { mainListItems, secondaryListItems } from './listItems.jsx';
 import SimpleLineChart from './SimpleLineChart.jsx';
 import SimpleTable from './SimpleTable.jsx';
-
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import Grid from '@material-ui/core/Grid';
 import Classes from './Classes.jsx'
 import Fields from './Fields.jsx'
@@ -114,6 +122,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       open : true,
+      page : "upload",
     };
   }
   
@@ -176,14 +185,58 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>
+            <div>
+              <ListItem button>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Upload" onClick={() => this.setState({ page : "upload"} )}/>
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <LayersIcon />
+                </ListItemIcon>
+                <ListItemText primary="Analysis" onClick={() => this.setState({ page : "analysis"} )}/>
+              </ListItem>
+            </div>
+          </List>
           <Divider />
-          <List>{secondaryListItems}</List>
+          <List>
+            <div>
+              <ListSubheader inset>Saved Ontologies</ListSubheader>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology A" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology B" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Ontology C" />
+              </ListItem>
+            </div>  
+          </List>
         </Drawer>
 
         <main>
          <div className={classes.appBarSpacer} />
-          <UploadPage  />
+         {this.state.page == "upload" && <UploadPage  />}
+         {this.state.page == "analysis" &&  <MainPage  />}
         </main>
 
 

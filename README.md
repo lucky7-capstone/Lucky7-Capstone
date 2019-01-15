@@ -8,8 +8,9 @@
 3. pip3 install -r requirements.txt
 4. python3 server.py
 5. Go to http://localhost:3000
+6. Use 'CTRL+SHIFT+R' to override the cache and reload the page
 
-Use 'CTRL+SHIFT+R' to refresh the page!
+Use 'CTRL+SHIFT+R' to reload the page after making any changes.
 
 (Thanks https://github.com/jwkvam/minimal-flask-react)
 

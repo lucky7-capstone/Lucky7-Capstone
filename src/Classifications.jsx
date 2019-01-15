@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-class Classes extends React.Component {
+class Classifications extends React.Component {
   render() {
     return (
     	<div>
@@ -20,6 +20,6 @@ class Classes extends React.Component {
 	}
 }
 
-export default Classes;
+export default Classifications;
 
 

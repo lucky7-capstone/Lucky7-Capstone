@@ -17,8 +17,9 @@ class UploadPage extends Component{
   }
   render(){
     return (
-      <DropzoneArea 
-        onChange={this.handleChange.bind(this)}
+
+      	<DropzoneArea 
+        	onChange={this.handleChange.bind(this)}
         />
     )  
   }

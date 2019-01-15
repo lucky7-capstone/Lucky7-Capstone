@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,7 +13,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
+import { withStyles } from '@material-ui/core/styles';
 import { mainListItems, secondaryListItems } from './listItems.jsx';
 import SimpleLineChart from './SimpleLineChart.jsx';
 import SimpleTable from './SimpleTable.jsx';
@@ -24,7 +23,6 @@ import Classes from './Classes.jsx'
 import Fields from './Fields.jsx'
 import MainPage from './MainPage.jsx'
 import UploadPage from './UploadPage.jsx'
-
 
 const drawerWidth = 240;
 
@@ -107,6 +105,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   }
 });
+
+
 
 class Dashboard extends React.Component {
 
@@ -192,6 +192,7 @@ class Dashboard extends React.Component {
   }
 
 }
+
 
 Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,

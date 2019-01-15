@@ -3,8 +3,9 @@ import json
 import os
 from werkzeug import secure_filename
 from flask import Flask, render_template, request
-app = Flask(__name__)
+import pandas as pd
 
+app = Flask(__name__)
 
 @app.route("/")
 def index():
@@ -16,8 +17,9 @@ def test():
 
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
-	file = request.files['file'] 
-	print(file.read())
+	file = request.files['file']
+	df = pd.read_csv(file)
+	print(df)
 	return json.dumps("WORKED?")
    	
 if __name__ == "__main__":

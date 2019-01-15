@@ -4,14 +4,13 @@
 ## Run Locally
 
 1. npm install
-2. npm run dev
+2. npm run dev (or "npm run start" in a different terminal to have the changes incorporate live
 3. pip install -r requirements.txt
 4. python server.py
 5. Goto http://localhost:3000
 
-If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
-
 Use 'CTRL+SHIFT+R' to refresh the page!
+
 (Thanks https://github.com/jwkvam/minimal-flask-react)
 
 # Components

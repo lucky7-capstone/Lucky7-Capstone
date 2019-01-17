@@ -29,6 +29,7 @@ import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
 import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
+import HomePage from './HomePage.jsx'
 
 const drawerWidth = 240;
 
@@ -113,7 +114,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       open : true,
-      page : "upload",
+      page : "home",
     };
   }
   
@@ -182,7 +183,7 @@ class Dashboard extends React.Component {
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary="Dashboard" onClick={() => this.setState({ page : "home"} )}/>
               </ListItem>
               <ListItem button onClick={() => this.setState({ page : "upload"} )}>
                 <ListItemIcon>
@@ -225,10 +226,12 @@ class Dashboard extends React.Component {
         </Drawer>
 
         <main className={classes.main}>
-         <div className={classes.appBarSpacer} />
-         {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
-         {this.state.page == "analysis" &&  <AnalysisPage  />}
+          <div className={classes.appBarSpacer} />
+          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
+          {this.state.page == "analysis" &&  <AnalysisPage  />}
+          {this.state.page == "home" && <HomePage />}
         </main>
+        
       </div>
     );
   }

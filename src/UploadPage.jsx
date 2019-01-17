@@ -26,7 +26,7 @@ class UploadPage extends Component{
 
   	render() {
 	    return (
-	    	<div align={"center"}>
+    		<div>
 	    	  Choose a csv file to analyze
 		      <form onSubmit={this.handleUploadImage}>
 		        <Button>

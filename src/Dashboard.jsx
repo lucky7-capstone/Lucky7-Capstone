@@ -35,6 +35,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
+    justifyContent : 'space-between',
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -92,24 +93,12 @@ const styles = theme => ({
     },
   },
   appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  chartContainer: {
-    marginLeft: -22,
-  },
-  tableContainer: {
-    height: 320,
-  },
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
   h6: {
     marginBottom: theme.spacing.unit * 2,
-  }
+  },
 });
 
 
@@ -234,8 +223,9 @@ class Dashboard extends React.Component {
         <main>
          <div className={classes.appBarSpacer} />
          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
-         {this.state.page == "analysis" &&  <MainPage  />}
+         {this.state.page == "analysis" &&  <AnalysisPage  />}
         </main>
+        <div></div>
       </div>
     );
   }

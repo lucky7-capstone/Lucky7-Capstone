@@ -36,7 +36,11 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
-    justifyContent: 'space-between'
+    //justifyContent: 'space-between',
+    height: 'calc(100vh - 64px)'
+  },
+  main: {
+    flex: 1
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -221,14 +225,12 @@ class Dashboard extends React.Component {
           </List>
         </Drawer>
 
-        <main>
+        <main className={classes.main}>
           <div className={classes.appBarSpacer} />
           {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
           {this.state.page == "analysis" &&  <AnalysisPage  />}
           {this.state.page == "home" && <HomePage />}
         </main>
-
-        <div></div>
 
       </div>
     );

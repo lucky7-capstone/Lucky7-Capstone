@@ -36,11 +36,10 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
-    //justifyContent: 'space-between',
-    height: 'calc(100vh - 64px)'
+    height:  'calc(100vh - 64px)',
   },
   main: {
-    flex: 1
+    flex: 1,
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -81,6 +80,7 @@ const styles = theme => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    height: '100vh',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -185,17 +185,17 @@ class Dashboard extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" onClick={() => this.setState({ page : "home"} )}/>
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={() => this.setState({ page : "upload"} )}>
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Upload" onClick={() => this.setState({ page : "upload"} )}/>
+                <ListItemText primary="Upload"/>
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={() => this.setState({ page : "analysis"} )}>
                 <ListItemIcon>
                   <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Analysis" onClick={() => this.setState({ page : "analysis"} )}/>
+                <ListItemText primary="Analysis"/>
               </ListItem>
             </div>
           </List>
@@ -231,7 +231,7 @@ class Dashboard extends React.Component {
           {this.state.page == "analysis" &&  <AnalysisPage  />}
           {this.state.page == "home" && <HomePage />}
         </main>
-
+        
       </div>
     );
   }

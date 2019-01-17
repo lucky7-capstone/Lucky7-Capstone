@@ -18,11 +18,7 @@ class App extends React.Component {
         const { classes } = this.props;
         
         return (
-
-            <React.Fragment>
-                <Dashboard />
-            </React.Fragment>
-
+            <Dashboard />
         );
     }
 }

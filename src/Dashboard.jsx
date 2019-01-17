@@ -35,7 +35,10 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
-    justifyContent : 'space-between',
+    height:  'calc(100vh - 64px)',
+  },
+  main: {
+    flex: 1,
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -76,6 +79,7 @@ const styles = theme => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    height: '100vh',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -180,17 +184,17 @@ class Dashboard extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={() => this.setState({ page : "upload"} )}>
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Upload" onClick={() => this.setState({ page : "upload"} )}/>
+                <ListItemText primary="Upload"/>
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={() => this.setState({ page : "analysis"} )}>
                 <ListItemIcon>
                   <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Analysis" onClick={() => this.setState({ page : "analysis"} )}/>
+                <ListItemText primary="Analysis"/>
               </ListItem>
             </div>
           </List>
@@ -220,12 +224,11 @@ class Dashboard extends React.Component {
           </List>
         </Drawer>
 
-        <main>
+        <main className={classes.main}>
          <div className={classes.appBarSpacer} />
          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
          {this.state.page == "analysis" &&  <AnalysisPage  />}
         </main>
-        <div></div>
       </div>
     );
   }

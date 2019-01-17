@@ -14,8 +14,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD
 //import SimpleLineChart from './SimpleLineChart.jsx';
 //import SimpleTable from './SimpleTable.jsx';
+=======
+>>>>>>> e3e483712d2ff4f1b0239b7c7642f22d683ba78e
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,9 +30,9 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Grid from '@material-ui/core/Grid';
-import Classes from './Classes.jsx'
+import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
-import MainPage from './MainPage.jsx'
+import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
 import HomePage from './HomePage.jsx'
 
@@ -96,24 +99,12 @@ const styles = theme => ({
     },
   },
   appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  chartContainer: {
-    marginLeft: -22,
-  },
-  tableContainer: {
-    height: 320,
-  },
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
   h6: {
     marginBottom: theme.spacing.unit * 2,
-  }
+  },
 });
 
 
@@ -236,14 +227,14 @@ class Dashboard extends React.Component {
         </Drawer>
 
         <main>
-         <div className={classes.appBarSpacer} />
-         {this.state.page == "upload" && <UploadPage  />}
-         {this.state.page == "analysis" &&  <MainPage  />}
-         {this.state.page == "home" && <HomePage />}
+          <div className={classes.appBarSpacer} />
+          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
+          {this.state.page == "analysis" &&  <AnalysisPage  />}
+          {this.state.page == "home" && <HomePage />}
         </main>
-
-        <div></div>
         
+        <div></div>
+
       </div>
     );
   }

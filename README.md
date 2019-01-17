@@ -4,14 +4,14 @@
 ## Run Locally
 
 1. npm install
-2. npm run dev
-3. pip install -r requirements.txt
-4. python server.py
-5. Goto http://localhost:3000
+2. npm run dev (or "npm run start" in a different terminal to have the changes incorporate live
+3. pip3 install -r requirements.txt
+4. python3 server.py
+5. Go to http://localhost:3000
+6. Use 'CTRL+SHIFT+R' to override the cache and reload the page
 
-If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
+Use 'CTRL+SHIFT+R' to reload the page after making any changes.
 
-If changes aren't appearing on the webpage try using 'CTRL+SHIFT+R' to refresh the page.
 (Thanks https://github.com/jwkvam/minimal-flask-react)
 
 # Components
@@ -28,17 +28,17 @@ Ontology notes:
 Categories can be grouped into Groupings which can then then be Classified.
 
 
-# Metrics for Clustering
+# Machine Learning 
 
-Category Clustering Metrics:
+Field Clustering Metrics:
 1. Levenshtein Distance for Field Names
 2. GloVe Word embeddings of Field Names
 
 Data Clustering Metrics:
 1. Averaged Trigram Similarty of multiple data entries
-2. Data Entry Length
-3. Data Entry Information Entropy
-4. 1-D Bidirectional ConvNet for pattern embedding
-5. Siamese Neural Network with Tripplet Loss
+2. Data Entry Information Entropy & Metadata
+3. 1-D Bidirectional ConvNet for pattern embedding
+
+Siamese Neural Network with Tripplet Loss
 
 

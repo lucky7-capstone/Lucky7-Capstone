@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MainPage from './MainPage.jsx'
+import AnalysisPage from './AnalysisPage.jsx'
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
@@ -19,14 +19,14 @@ class UploadPage extends Component{
 	      body: data,
 	    }).then((response) => {
 	      response.json().then((body) => {
-	        console.log(body);
+	        this.props.handleData(body);
 	      });
 	    });
 	}
 
   	render() {
 	    return (
-	    	<div align={"center"}>
+    		<div>
 	    	  Choose a csv file to analyze
 		      <form onSubmit={this.handleUploadImage}>
 		        <Button>

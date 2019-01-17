@@ -14,11 +14,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
-<<<<<<< HEAD
-//import SimpleLineChart from './SimpleLineChart.jsx';
-//import SimpleTable from './SimpleTable.jsx';
-=======
->>>>>>> e3e483712d2ff4f1b0239b7c7642f22d683ba78e
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -232,7 +227,7 @@ class Dashboard extends React.Component {
           {this.state.page == "analysis" &&  <AnalysisPage  />}
           {this.state.page == "home" && <HomePage />}
         </main>
-        
+
         <div></div>
 
       </div>

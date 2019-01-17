@@ -20,7 +20,7 @@ class MainPage extends React.Component {
 			      <img src="https://i1.rgstatic.net/ii/profile.image/337767809732610-1457541529558_Q128/Bruno_Da_Silva3.jpg" alt="Italian Trulli" />
 			    </Grid>
 			  </Grid>
-			  </div>
+			</div>
 		);
 	}
 

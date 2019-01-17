@@ -14,8 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
-import SimpleLineChart from './SimpleLineChart.jsx';
-import SimpleTable from './SimpleTable.jsx';
+//import SimpleLineChart from './SimpleLineChart.jsx';
+//import SimpleTable from './SimpleTable.jsx';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -31,12 +31,14 @@ import Classes from './Classes.jsx'
 import Fields from './Fields.jsx'
 import MainPage from './MainPage.jsx'
 import UploadPage from './UploadPage.jsx'
+import HomePage from './HomePage.jsx'
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     display: 'flex',
+    justifyContent: 'space-between'
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -122,7 +124,7 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       open : true,
-      page : "upload",
+      page : "home",
     };
   }
   
@@ -191,7 +193,7 @@ class Dashboard extends React.Component {
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary="Dashboard" onClick={() => this.setState({ page : "home"} )}/>
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
@@ -237,9 +239,11 @@ class Dashboard extends React.Component {
          <div className={classes.appBarSpacer} />
          {this.state.page == "upload" && <UploadPage  />}
          {this.state.page == "analysis" &&  <MainPage  />}
+         {this.state.page == "home" && <HomePage />}
         </main>
 
-
+        <div></div>
+        
       </div>
     );
   }

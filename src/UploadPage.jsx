@@ -5,10 +5,12 @@ import Button from '@material-ui/core/Button';
 
 const style = {
 	display: 'flex',
-    backgroundImage: 'url("https://cdn.britannica.com/s:300x300/55/174255-004-9A4971E9.jpg")',
+    //backgroundImage: 'url("https://cdn.britannica.com/s:300x300/55/174255-004-9A4971E9.jpg")',
     backgroundSize: 'cover',
     width: '100%',
     height: '100%',
+    position: 'relative',
+    top: '25%',
     justifyContent: 'center',
 }
 

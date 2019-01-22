@@ -227,7 +227,7 @@ class Dashboard extends React.Component {
 
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
-          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"});console.log(data);}}/>}
+          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"}); console.log(data);}}/>}
           {this.state.page == "analysis" &&  <AnalysisPage  />}
           {this.state.page == "home" && <HomePage />}
         </main>

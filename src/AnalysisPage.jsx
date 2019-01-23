@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
+import Workspace from "./Workspace.jsx";
 
 class AnalysisPage extends React.Component {
 
@@ -17,7 +18,7 @@ class AnalysisPage extends React.Component {
 			      <Fields values={["field", "asdf", "dsfa", "asdfsda", "fieadsfasdfsadfasdfld"]} />
 			    </Grid>
 			    <Grid key="3" xs={6} item>
-			      <img src="https://i1.rgstatic.net/ii/profile.image/337767809732610-1457541529558_Q128/Bruno_Da_Silva3.jpg" alt="Italian Trulli" />
+			      <Workspace />
 			    </Grid>
 			  </Grid>
 			</div>

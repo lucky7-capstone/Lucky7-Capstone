@@ -35,6 +35,7 @@ const styles = {
 };
 
 
+
 class Classifications extends React.Component {
 
     constructor(props){

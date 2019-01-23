@@ -43,23 +43,27 @@ Siamese Neural Network with Tripplet Loss
 
 
 # Data Structures
+
+```
 classifications:
 {
-  cid: {
-    classname: string
-    metadata: Object
-    values: {
-      field-id: Confidence Interval
-      ...           
-    }
-  }
-  ...    
+  cid: { 
+    classname: string   
+    metadata: Object   
+    values: {   
+      field-id: Confidence Interval     
+      ...              
+    }   
+  } 
+  ...     
 }
+
 fields:
 { 
-    field-id: {
-    }
-    ... 
-  }
-  ...
+    field-id: {   
+    }   
+    ...    
+  } 
+  ... 
 }
+```

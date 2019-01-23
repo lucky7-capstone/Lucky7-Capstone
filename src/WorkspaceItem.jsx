@@ -9,9 +9,9 @@ class WorkspaceItem extends React.Component {
       <div>
         <h1>{this.props.name}</h1>
         <List component="nav">
-          {this.props.values.map(value => (
-            <ListItem button key={value}>
-              <ListItemText primary={value}/>
+          {Object.keys(this.props.values).map( key => (
+            <ListItem button key={key}>
+              <ListItemText primary={key}/>
             </ListItem>
           ))}
         </List>

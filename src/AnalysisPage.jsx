@@ -2,9 +2,18 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
-import Workspace from "./Workspace.jsx";
+import WorkspaceGrid from "./WorkspaceGrid.jsx";
 
 class AnalysisPage extends React.Component {
+
+
+  constructor(props){
+    super(props);
+    this.state = {
+      selected : {}
+    }
+  }
+
 
 	classifications = {
 		c_1 : {
@@ -63,17 +72,19 @@ class AnalysisPage extends React.Component {
                 v2: 2
             }
         },
-	}
+	};
 
 
   handleExport = (key) => {
-    console.log(key);
-    //@@ MAX, this is where you should get your info from.
-    // this.state.selected is a dictionary of the keys that are getting sent to the data workbench
-    // the value associated with each key is arbitrary
-
-    // this function is called when the export is triggered
-  }
+    const selected = this.state.selected;
+    Object.keys(key).map( key => {
+      if (this.classifications[key] in selected) {
+        delete selected[key]
+      }
+      selected[key] = this.classifications[key]
+    });
+    this.setState(selected)
+  };
 
 
 	render() {
@@ -88,7 +99,7 @@ class AnalysisPage extends React.Component {
 			      <Fields values={["field", "asdf", "dsfa", "asdfsda", "fieadsfasdfsadfasdfld"]} />
 			    </Grid>
 			    <Grid key="3" xs={6} item>
-			      <Workspace />
+			      <WorkspaceGrid classifications={this.state.selected}/>
 			    </Grid>
 			  </Grid>
 			</div>

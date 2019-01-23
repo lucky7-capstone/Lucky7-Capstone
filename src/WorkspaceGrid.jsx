@@ -15,9 +15,9 @@ class WorkspaceGrid extends React.Component {
     return (
       <div style={styles.workspaceStyle}>
         <Grid container justify="center" spacing={24} wrap={'nowrap'}>
-          {this.props.classifications.map(classification => (
-            <WorkspaceItem name={classification.name} values={classification.values} />
-          ))}
+          {Object.keys(this.props.classifications).map( key => (
+          <WorkspaceItem name={this.props.classifications[key].name} values={this.props.classifications[key].values}/>
+        ))}
         </Grid>
       </div>
     );

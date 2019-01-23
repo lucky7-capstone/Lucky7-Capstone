@@ -5,19 +5,75 @@ import Fields from './Fields.jsx'
 
 class AnalysisPage extends React.Component {
 
+	classifications = {
+		c_1 : {
+			c_name : "classification 1",
+			values : {
+				v1: 1,
+				v2: 2
+			}
+		},
+        c_2 : {
+            c_name : "classification 2",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_3 : {
+            c_name : "classification 3",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_4 : {
+            c_name : "classification 4",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_5 : {
+            c_name : "classification 5",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_6 : {
+            c_name : "classification 6",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_7 : {
+            c_name : "classification 7",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+        c_8 : {
+            c_name : "classification 8",
+            values : {
+                v1: 1,
+                v2: 2
+            }
+        },
+	}
+
 	render() {
 
 		return (
 			<div>
 			  <Grid container justify="center" spacing={24}>
-			    <Grid key="1" xs={3} item>
-			      <Classifications values={["class", "a", "b", "c", "d"]} />
+			    <Grid key="1" xs={6} item>
+			      <Classifications classifications={this.classifications} />
 			    </Grid>
-			    <Grid key="2" xs={3} item>
+			    <Grid key="2" xs={6} item>
 			      <Fields values={["field", "asdf", "dsfa", "asdfsda", "fieadsfasdfsadfasdfld"]} />
-			    </Grid>
-			    <Grid key="3" xs={6} item>
-			      <img src="https://i1.rgstatic.net/ii/profile.image/337767809732610-1457541529558_Q128/Bruno_Da_Silva3.jpg" alt="Italian Trulli" />
 			    </Grid>
 			  </Grid>
 			</div>

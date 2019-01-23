@@ -22,6 +22,21 @@ const styles = {
     }
 };
 
+class EnhancedTableHead extends React.Component {
+
+    render(){
+        return(
+            <TableHead>
+                <TableRow>
+                    <TableCell>
+                        <h1>{this.props.tableName}</h1>
+                    </TableCell>
+                </TableRow>
+            </TableHead>
+        )
+    }
+}
+
 
 
 class Classifications extends React.Component {
@@ -48,13 +63,7 @@ class Classifications extends React.Component {
             <div>
                 <Paper style={styles.paperContainer}>
                     <Table style={styles.table}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>
-                                    <h1>Classifications</h1>
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
+                        <EnhancedTableHead tableName={"Classifications"}/>
                         {Object.keys(this.props.classifications).map( key => (
                             <TableBody>
                                 <TableRow

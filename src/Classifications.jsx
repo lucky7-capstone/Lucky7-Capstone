@@ -54,15 +54,6 @@ class Classifications extends React.Component {
         this.setState(selected)
     };
 
-    handleExport = (key) => {
-        console.log(this.state.selected);
-        //@@ MAX, this is where you should get your info from.
-        // this.state.selected is a dictionary of the keys that are getting sent to the data workbench
-               // the value associated with each key is arbitrary
-
-        // this function is called when the export is triggered
-    }
-
     render(){
         return (
             <div>
@@ -82,7 +73,7 @@ class Classifications extends React.Component {
                                     onClick={event => this.handleSelectRow(key)}
                                     selected={key in this.state.selected}
                                 >
-                                    <TableCell>{this.props.classifications[key].c_name}</TableCell>
+                                    <TableCell>{this.props.classifications[key].name}</TableCell>
                                 </TableRow>
                             </TableBody>
                         ))}
@@ -90,7 +81,7 @@ class Classifications extends React.Component {
                 </Paper>
                 <Button variant={"contained"}
                         component={'span'}
-                        onClick={(event) => this.handleExport()}
+                        onClick={(event) => this.props.callback(this.state.selected)}
                 >
                     Send to WorkBench
                 </Button>

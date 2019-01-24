@@ -19,14 +19,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import Grid from '@material-ui/core/Grid';
-import Classifications from './Classifications.jsx'
-import Fields from './Fields.jsx'
 import AnalysisPage from './AnalysisPage.jsx'
 import UploadPage from './UploadPage.jsx'
 import HomePage from './HomePage.jsx'
@@ -115,6 +110,7 @@ class Dashboard extends React.Component {
     this.state = {
       open : true,
       page : "home",
+      data : null
     };
   }
   

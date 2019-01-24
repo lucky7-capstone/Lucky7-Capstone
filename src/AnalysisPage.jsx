@@ -10,7 +10,8 @@ class AnalysisPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      selected : {}
+      selectedClassifications : {},
+      selectedFields : {}
     }
   }
 
@@ -72,19 +73,61 @@ class AnalysisPage extends React.Component {
                 v2: 2
             }
         },
-	};
+    };
+    
+    fields = {
+        f_1 : {
+            name: "field 1"
+        },
+        f_2 : {
+            name: "field 2"
+        },
+        f_3 : {
+            name: "field 3"
+        },
+        f_4 : {
+            name: "field 4"
+        },
+        f_5 : {
+            name: "field 5"
+        },
+        f_6 : {
+            name: "field 6"
+        },
+        f_7 : {
+            name: "field 7"
+        },
+        f_8 : {
+            name: "field 8"
+        },
+    };
 
 
-  handleExport = (key) => {
-    const selected = this.state.selected;
+  handleClassificationsExport = (key) => {
+    const selected = this.state.selectedClassifications;
     Object.keys(key).map( key => {
       if (this.classifications[key] in selected) {
         delete selected[key]
       }
       selected[key] = this.classifications[key]
     });
-    this.setState(selected)
+    this.setState({
+        selectedClassifications : selected
+    });
   };
+
+  handleFieldsExport = (key) => {
+      const selected = this.state.selectedFields;
+      Object.keys(key).map( key => {
+          if (this.fields[key] in selected) {
+              delete selected[key]
+          }
+          selected[key] = this.fields[key]
+      });
+      this.setState({
+          selectedFields : selected
+      });
+  }
 
 
 	render() {
@@ -93,13 +136,13 @@ class AnalysisPage extends React.Component {
 			<div>
 			  <Grid container justify="center" spacing={24}>
 			    <Grid key="1" xs={6} item>
-			      <Classifications classifications={this.classifications} callback={this.handleExport}/>
+			      <Classifications classifications={this.classifications} callback={this.handleClassificationsExport}/>
 			    </Grid>
 			    <Grid key="2" xs={6} item>
-			      <Fields values={["field", "asdf", "dsfa", "asdfsda", "fieadsfasdfsadfasdfld"]} />
+			      <Fields fields={this.fields} callback={this.handleFieldsExport} />
 			    </Grid>
 			    <Grid key="3" xs={6} item>
-			      <WorkspaceGrid classifications={this.state.selected}/>
+			      <WorkspaceGrid classifications={this.state.selectedClassifications}/>
 			    </Grid>
 			  </Grid>
 			</div>

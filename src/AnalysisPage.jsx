@@ -11,69 +11,67 @@ class AnalysisPage extends React.Component {
     super(props);
     this.state = {
       selectedClassifications : {},
-      selectedFields : {}
-    }
-  }
-
-
-	classifications = {
-		c_1 : {
-			name : "classification 1",
-			values : {
-				v1: 1,
-				v2: 2
-			}
-		},
+      selectedFields : {},
+      classifications : {
+        c_1 : {
+          name : "classification 1",
+          values : {
+            v1: 1,
+            v2: 2
+          }
+        },
         c_2 : {
-            name : "classification 2",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 2",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_3 : {
-            name : "classification 3",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 3",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_4 : {
-            name : "classification 4",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 4",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_5 : {
-            name : "classification 5",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 5",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_6 : {
-            name : "classification 6",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 6",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_7 : {
-            name : "classification 7",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 7",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
         c_8 : {
-            name : "classification 8",
-            values : {
-                v1: 1,
-                v2: 2
-            }
+          name : "classification 8",
+          values : {
+            v1: 1,
+            v2: 2
+          }
         },
-    };
+      }
+    }
+  }
     
     fields = {
         f_1 : {
@@ -106,10 +104,10 @@ class AnalysisPage extends React.Component {
   handleClassificationsExport = (key) => {
     const selected = this.state.selectedClassifications;
     Object.keys(key).map( key => {
-      if (this.classifications[key] in selected) {
+      if (this.state.classifications[key] in selected) {
         delete selected[key]
       }
-      selected[key] = this.classifications[key]
+      selected[key] = this.state.classifications[key]
     });
     this.setState({
         selectedClassifications : selected
@@ -127,7 +125,16 @@ class AnalysisPage extends React.Component {
       this.setState({
           selectedFields : selected
       });
-  }
+  };
+
+
+  deleteField = (key, field) => {
+    const classifications = this.state.classifications;
+    delete classifications[key].values[field];
+    this.setState({
+      classifications : classifications
+    })
+  };
 
 
 	render() {
@@ -136,13 +143,13 @@ class AnalysisPage extends React.Component {
 			<div>
 			  <Grid container justify="center" spacing={24}>
 			    <Grid key="1" xs={6} item>
-			      <Classifications classifications={this.classifications} callback={this.handleClassificationsExport}/>
+			      <Classifications classifications={this.state.classifications} callback={this.handleClassificationsExport}/>
 			    </Grid>
 			    <Grid key="2" xs={6} item>
 			      <Fields fields={this.fields} callback={this.handleFieldsExport} />
 			    </Grid>
 			    <Grid key="3" xs={6} item>
-			      <WorkspaceGrid classifications={this.state.selectedClassifications}/>
+			      <WorkspaceGrid classifications={this.state.selectedClassifications} dfield={this.deleteField}/>
 			    </Grid>
 			  </Grid>
 			</div>

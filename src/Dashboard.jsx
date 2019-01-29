@@ -113,6 +113,14 @@ class Dashboard extends React.Component {
       data : null
     };
   }
+
+  saveData = (data) => {
+    this.setState({
+      data: data,
+      page: "analysis"
+    });
+    console.log(data);
+  }
   
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -175,11 +183,11 @@ class Dashboard extends React.Component {
           <Divider />
           <List>
             <div>
-              <ListItem button>
+              <ListItem button onClick={() => this.setState({ page : "home"} )}>
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" onClick={() => this.setState({ page : "home"} )}/>
+                <ListItemText primary="Dashboard" />
               </ListItem>
               <ListItem button onClick={() => this.setState({ page : "upload"} )}>
                 <ListItemIcon>
@@ -223,7 +231,7 @@ class Dashboard extends React.Component {
 
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
-          {this.state.page == "upload" && <UploadPage  handleData={(data) => {this.setState({page:"analysis"}); console.log(data);}}/>}
+          {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
           {this.state.page == "analysis" &&  <AnalysisPage  />}
           {this.state.page == "home" && <HomePage />}
         </main>

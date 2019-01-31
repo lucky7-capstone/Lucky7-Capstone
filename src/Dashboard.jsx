@@ -116,10 +116,10 @@ class Dashboard extends React.Component {
 
   saveData = (data) => {
     this.setState({
-      data: data,
+      data: JSON.parse(data),
       page: "analysis"
     });
-    console.log(data);
+   // console.log(data);
   }
   
   handleDrawerOpen = () => {
@@ -232,7 +232,7 @@ class Dashboard extends React.Component {
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
           {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
-          {this.state.page == "analysis" &&  <AnalysisPage  />}
+          {this.state.page == "analysis" &&  <AnalysisPage  data={this.state.data} />}
           {this.state.page == "home" && <HomePage />}
         </main>
         

@@ -31,16 +31,16 @@ def data_classifier(df):
 	    for field_name in fields:
 	        field_id = "field-" + str(uuid.uuid4())
 	        cluster[field_id] = uncert.loc[field_name][i]
-	        fields_obj[field_id] = {"field_name" : field_name}
+	        fields_obj[field_id] = {"name" : field_name}
 
 	    cid_obj = {}
-	    cid_obj["classname"] = None
+	    cid_obj["name"] = "cow" + str(i)
 	    cid_obj["metadata"] = None
 	    cid_obj["values"] = cluster
 	    classifications_obj["classification-" + str(uuid.uuid4())] = cid_obj
 
 	data = {}
-	data["Classifcations"] = classifications_obj
+	data["Classifications"] = classifications_obj
 	data["Fields"] = fields_obj
 	return(json.dumps(data, sort_keys=True, indent=4))
 

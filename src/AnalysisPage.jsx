@@ -1,5 +1,4 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
 import WorkspaceGrid from "./WorkspaceGrid.jsx";
@@ -7,6 +6,8 @@ import WorkspaceGrid from "./WorkspaceGrid.jsx";
 const styles = {
   analysisPageStyle: {
     width: '100%',
+    display: 'flex',
+    flexDirection: 'row'
   }
 };
 
@@ -75,19 +76,11 @@ class AnalysisPage extends React.Component {
 
 		return (
 			<div style={styles.analysisPageStyle}>
-			  <Grid container>
-			    <Grid key="1" item>
 			      <Classifications classifications={this.state.classifications} callback={this.handleClassificationsExport}/>
-			    </Grid>
-			    <Grid key="2" item>
 			      <Fields fields={this.state.fields} callback={this.handleFieldsExport} />
-			    </Grid>
-			    <Grid key="3" item>
 			      <WorkspaceGrid classifications={this.state.selectedClassifications}
                            fieldCallback={this.deleteField}
                            classificationCallback={this.handleWorkspaceClassifications}/>
-			    </Grid>
-			  </Grid>
 			</div>
 		);
 	}

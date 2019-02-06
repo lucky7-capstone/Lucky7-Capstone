@@ -19,7 +19,7 @@ const styles = {
     paperContainer: {
         display: 'flex',
         width: '100%',
-        height: '1%',
+        height: '100%',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
 

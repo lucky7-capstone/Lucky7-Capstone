@@ -6,19 +6,29 @@ import WorkspaceItem from "./WorkspaceItem.jsx";
 const styles = {
   workspaceStyle: {
     overflowX: 'scroll',
-    height: '300px'
+    display: 'flex',
+    height: '300px',
+    width: '100%',
   }
 };
 
 class WorkspaceGrid extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedClassifications : {},
+    }
+  }
+
   render() {
     return (
       <div style={styles.workspaceStyle}>
         <Grid container justify="center" spacing={24} wrap={'nowrap'}>
           {Object.keys(this.props.classifications).map( key => (
           <WorkspaceItem name={this.props.classifications[key].name}
+                         classificationCallback = {() => this.props.classificationCallback(key)}
                          values={this.props.classifications[key].values}
-                          rfield = {(event) => this.props.dfield(key, event)}/>
+                         fieldCallback = {(event) => this.props.fieldCallback(key, event)}/>
         ))}
         </Grid>
       </div>

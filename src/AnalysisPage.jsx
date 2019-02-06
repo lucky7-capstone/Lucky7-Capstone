@@ -7,7 +7,8 @@ const styles = {
   analysisPageStyle: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: '30px'
   }
 };
 

@@ -7,8 +7,9 @@ const styles = {
   workspaceStyle: {
     overflowX: 'scroll',
     display: 'flex',
-    height: '300px',
+    height: '80vh',
     width: '100%',
+    margin: '30px'
   }
 };
 

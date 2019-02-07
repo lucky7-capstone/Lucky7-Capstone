@@ -1,27 +1,87 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+
+const styles = {
+  wrapper: {
+    margin: '10px',
+    float: 'left',
+    width: '50vh'
+  },
+  table: {
+    minWidth: 200,
+  },
+};
 
 class WorkspaceItem extends React.Component {
-  render() {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      selected: false
+    }
+  }
 
+  getPaperStyle() {
+    return {
+      display: 'flex',
+      width: '100%',
+      opacity: this.state.selected ? '0.8' : '1',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  }
+
+  handleSelect = () => {
+    this.props.classificationCallback();
+    const selected = !this.state.selected;
+    this.setState({
+      selected: selected
+    })
+  };
+
+  tableHead(tableName){
+    return(
+      <TableHead>
+        <TableRow onClick={() => this.handleSelect()}>
+          <TableCell>
+            <h1>{tableName}</h1>
+          </TableCell>
+        </TableRow>
+      </TableHead>
+    )
+  }
+
+  tableBody(values){
     return (
-      <div>
-        <h1>{this.props.name}</h1>
-        <List component="nav">
-          {Object.keys(this.props.values).map( key => (
-            <ListItem button
-                      key={key}
-                      onClick={() => this.props.rfield(key)}>
-              <ListItemText primary={key}/>
-            </ListItem>
-          ))}
-        </List>
+      <TableBody>
+        {Object.keys(values).map( key => (
+          <TableRow
+            hover
+            onClick={() => this.props.fieldCallback(key)}
+          >
+            <TableCell>{this.props.fields[key].name}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    )
+  }
+
+  render(){
+    return(
+      <div style={styles.wrapper}>
+        <Paper style={this.getPaperStyle()}>
+          <Table style={styles.table}>
+            {this.tableHead(this.props.name)}
+            {this.tableBody(this.props.values)}
+          </Table>
+        </Paper>
       </div>
-    );
+    )
   }
 }
 

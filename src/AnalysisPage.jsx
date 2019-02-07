@@ -1,24 +1,54 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
 import WorkspaceGrid from "./WorkspaceGrid.jsx";
+
+const styles = {
+  analysisPageStyle: {
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '30px'
+  }
+};
 
 class AnalysisPage extends React.Component {
 
 
   constructor(props){
     super(props);
+    console.log(this.props.data);
     this.state = {
       classifications : this.props.data.Classifications,
       fields : this.props.data.Fields,
       selectedClassifications : {},
-      selectedFields : {},
+      workspaceClassifications : {}
     }
   }
-    
 
+  addWorkspaceClassifications = (key) => {
+    const selected = this.state.workspaceClassifications;
+    if (this.state.classifications[key] in selected) {
+        delete selected[key]
+    }
+    selected[key] = this.state.classifications[key];
+    console.log(selected);
+    this.setState({
+      workspaceClassifications : selected
+    });
+  };
 
+  removeWorkspaceClassifications = () => {
+    const inWorkspace = this.state.selectedClassifications;
+    const selectedWorkspace = this.state.workspaceClassifications;
+    Object.keys(selectedWorkspace).map(key => {
+      delete inWorkspace[key]
+    });
+    this.setState({
+      workspaceClassifications : {},
+      selectedClassifications: inWorkspace
+    });
+  };
 
   handleClassificationsExport = (key) => {
     const selected = this.state.selectedClassifications;
@@ -34,15 +64,14 @@ class AnalysisPage extends React.Component {
   };
 
   handleFieldsExport = (key) => {
-      const selected = this.state.selectedFields;
-      Object.keys(key).map( key => {
-          if (this.state.fields[key] in selected) {
-              delete selected[key]
-          }
-          selected[key] = this.state.fields[key]
+      const classifications = this.state.classifications;
+      Object.keys(key).map( fKey => {
+        Object.keys(this.state.workspaceClassifications).map(wKey => {
+          classifications[wKey].values[fKey] = {fKey: 0.0}
+        })
       });
       this.setState({
-          selectedFields : selected
+        classifications : classifications
       });
   };
 
@@ -59,18 +88,14 @@ class AnalysisPage extends React.Component {
 	render() {
 
 		return (
-			<div>
-			  <Grid container justify="center" spacing={24}>
-			    <Grid key="1" xs={6} item>
+			<div style={styles.analysisPageStyle}>
 			      <Classifications classifications={this.state.classifications} callback={this.handleClassificationsExport}/>
-			    </Grid>
-			    <Grid key="2" xs={6} item>
 			      <Fields fields={this.state.fields} callback={this.handleFieldsExport} />
-			    </Grid>
-			    <Grid key="3" xs={6} item>
-			      <WorkspaceGrid classifications={this.state.selectedClassifications} dfield={this.deleteField}/>
-			    </Grid>
-			  </Grid>
+			      <WorkspaceGrid classifications={this.state.selectedClassifications}
+                           fields={this.state.fields}
+                           fieldCallback={this.deleteField}
+                           addClassificationCallback={this.addWorkspaceClassifications}
+                           removeClassificationCallback={this.removeWorkspaceClassifications}/>
 			</div>
 		);
 	}

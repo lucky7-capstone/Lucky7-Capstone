@@ -13,16 +13,24 @@ import Button from '@material-ui/core/Button';
 // in one super class
 
 const styles = {
+    wrapper: {
+        margin: '25px',
+        height: '75vh',
+        width: '30vh'
+    },
     table: {
         minWidth: 200,
     },
     paperContainer: {
         display: 'flex',
         width: '100%',
-        height: '1%',
+        height: '100%',
+        overflowY: 'auto',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-
+    },
+    button: {
+        margin: '10px',
     }
 };
 
@@ -48,7 +56,7 @@ class EnhancedTable extends React.Component {
     tableHead(tableName){
         return(
             <TableHead>
-                <TableRow>
+                <TableRow styles={{display: 'flex'}}>
                     <TableCell>
                         <h1>{tableName}</h1>
                     </TableCell>
@@ -75,7 +83,8 @@ class EnhancedTable extends React.Component {
 
     sendDataButton(callback){
         return(
-            <Button variant={"contained"}
+            <Button style={styles.button}
+                    variant={"contained"}
                     component={'span'}
                     onClick={() => callback(this.state.selected)}
             >
@@ -86,7 +95,7 @@ class EnhancedTable extends React.Component {
 
     render(){
         return(
-            <div>
+            <div style={styles.wrapper}>
                 <Paper style={styles.paperContainer}>
                     <Table style={styles.table}>
                         {this.tableHead(this.props.name)}

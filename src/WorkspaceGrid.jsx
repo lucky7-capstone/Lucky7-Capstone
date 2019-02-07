@@ -5,6 +5,9 @@ import Button from "@material-ui/core/Button";
 
 
 const styles = {
+  wrapper: {
+    width: '50vh',
+  },
   workspaceStyle: {
     overflowX: 'scroll',
     height: '75vh',
@@ -30,7 +33,7 @@ class WorkspaceGrid extends React.Component {
 
   render() {
     return (
-      <div style={{width: '50vh'}}>
+      <div style={styles.wrapper}>
         <div style={styles.workspaceStyle}>
           <Grid container justify="left" spacing={24} wrap={'nowrap'}>
             {Object.keys(this.props.classifications).map( key => (

@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 
 const styles = {
   wrapper: {
+    padding: '20px',
     margin: '10px',
     float: 'left',
     width: '50vh'

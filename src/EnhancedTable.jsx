@@ -14,22 +14,23 @@ import Button from '@material-ui/core/Button';
 
 const styles = {
     wrapper: {
-        margin: '30px',
-        height: '80vh'
+        margin: '25px',
+        height: '75vh',
+        width: '30vh'
     },
     table: {
         minWidth: 200,
     },
-  tableBody: {
-     overflow: 'auto',
-    maxHeight: '80vh'
-  },
     paperContainer: {
         display: 'flex',
         width: '100%',
         height: '100%',
+        overflowY: 'auto',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+    },
+    button: {
+        margin: '10px',
     }
 };
 
@@ -66,7 +67,7 @@ class EnhancedTable extends React.Component {
 
     tableBody(values){
         return (
-            <TableBody style={styles.tableBody}>
+            <TableBody>
                 {Object.keys(values).map( key => (
                     <TableRow
                         hover
@@ -82,7 +83,8 @@ class EnhancedTable extends React.Component {
 
     sendDataButton(callback){
         return(
-            <Button variant={"contained"}
+            <Button style={styles.button}
+                    variant={"contained"}
                     component={'span'}
                     onClick={() => callback(this.state.selected)}
             >

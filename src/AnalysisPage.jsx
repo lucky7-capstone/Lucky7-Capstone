@@ -5,7 +5,7 @@ import WorkspaceGrid from "./WorkspaceGrid.jsx";
 
 const styles = {
   analysisPageStyle: {
-    width: '100%',
+    width: '80%',
     display: 'flex',
     flexDirection: 'row',
     padding: '30px'
@@ -26,7 +26,7 @@ class AnalysisPage extends React.Component {
     }
   }
 
-  handleWorkspaceClassifications = (key) => {
+  addWorkspaceClassifications = (key) => {
     const selected = this.state.workspaceClassifications;
     if (this.state.classifications[key] in selected) {
         delete selected[key]
@@ -35,6 +35,18 @@ class AnalysisPage extends React.Component {
     console.log(selected);
     this.setState({
       workspaceClassifications : selected
+    });
+  };
+
+  removeWorkspaceClassifications = () => {
+    const inWorkspace = this.state.selectedClassifications;
+    const selectedWorkspace = this.state.workspaceClassifications;
+    Object.keys(selectedWorkspace).map(key => {
+      delete inWorkspace[key]
+    });
+    this.setState({
+      workspaceClassifications : {},
+      selectedClassifications: inWorkspace
     });
   };
 
@@ -80,8 +92,10 @@ class AnalysisPage extends React.Component {
 			      <Classifications classifications={this.state.classifications} callback={this.handleClassificationsExport}/>
 			      <Fields fields={this.state.fields} callback={this.handleFieldsExport} />
 			      <WorkspaceGrid classifications={this.state.selectedClassifications}
+                           fields={this.state.fields}
                            fieldCallback={this.deleteField}
-                           classificationCallback={this.handleWorkspaceClassifications}/>
+                           addClassificationCallback={this.addWorkspaceClassifications}
+                           removeClassificationCallback={this.removeWorkspaceClassifications}/>
 			</div>
 		);
 	}

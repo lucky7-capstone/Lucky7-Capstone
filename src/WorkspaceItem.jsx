@@ -7,17 +7,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 
 const styles = {
+  wrapper: {
+    margin: '10px',
+    float: 'left',
+    width: '50vh'
+  },
   table: {
     minWidth: 200,
   },
-  paperContainer: {
-    display: 'flex',
-    width: '100%',
-    height: '1%',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-
-  }
 };
 
 class WorkspaceItem extends React.Component {
@@ -25,7 +22,6 @@ class WorkspaceItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      selectedFields : {},
       selected: false
     }
   }
@@ -34,7 +30,6 @@ class WorkspaceItem extends React.Component {
     return {
       display: 'flex',
       width: '100%',
-      height: '1%',
       opacity: this.state.selected ? '0.8' : '1',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -46,18 +41,6 @@ class WorkspaceItem extends React.Component {
     const selected = !this.state.selected;
     this.setState({
       selected: selected
-    })
-  };
-
-  handleSelectRow = (key) => {
-    const selected = this.state.selectedFields;
-    if (key in selected) {
-      delete selected[key]
-    } else {
-      selected[key] = 1;
-    }
-    this.setState({
-      selectedFields: selected
     })
   };
 
@@ -80,9 +63,8 @@ class WorkspaceItem extends React.Component {
           <TableRow
             hover
             onClick={() => this.props.fieldCallback(key)}
-            selected={key in this.state.selectedFields}
           >
-            <TableCell>{key}</TableCell>
+            <TableCell>{this.props.fields[key].name}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -91,7 +73,7 @@ class WorkspaceItem extends React.Component {
 
   render(){
     return(
-      <div>
+      <div style={styles.wrapper}>
         <Paper style={this.getPaperStyle()}>
           <Table style={styles.table}>
             {this.tableHead(this.props.name)}

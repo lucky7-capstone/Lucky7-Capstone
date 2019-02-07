@@ -34,7 +34,7 @@ def data_classifier(df):
 	        fields_obj[field_id] = {"name" : field_name}
 
 	    cid_obj = {}
-	    cid_obj["name"] = "cow" + str(i)
+	    cid_obj["name"] = "classification" + str(i)
 	    cid_obj["metadata"] = None
 	    cid_obj["values"] = cluster
 	    classifications_obj["classification-" + str(uuid.uuid4())] = cid_obj

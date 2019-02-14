@@ -89,8 +89,8 @@ class AnalysisPage extends React.Component {
 
 		return (
 			<div style={styles.analysisPageStyle}>
-			      <Classifications classifications={this.state.classifications} callback={this.handleClassificationsExport}/>
-			      <Fields fields={this.state.fields} callback={this.handleFieldsExport} />
+			      <Classifications classifications={this.state.classifications} fields={this.state.fields} callback={this.handleClassificationsExport}/>
+			      <Fields classifications={this.state.classifications} fields={this.state.fields} callback={this.handleFieldsExport} />
 			      <WorkspaceGrid classifications={this.state.workspaceClassifications}
                            fields={this.state.fields}
                            fieldCallback={this.deleteField}

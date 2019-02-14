@@ -6,6 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import PopupModal from './PopupModal.jsx'
 
 /////////////////////////////////////////////////////////////////////////////
 // The table for Classifications and fields share many of the same
@@ -16,10 +18,10 @@ const styles = {
     wrapper: {
         margin: '25px',
         height: '75vh',
-        width: '30vh'
+        width: '35vh'
     },
     table: {
-        minWidth: 200,
+        minWidth: 300,
     },
     paperContainer: {
         display: 'flex',
@@ -33,13 +35,20 @@ const styles = {
         margin: '10px',
     }
 };
+	  
+PopupModal.propTypes = {
+	onClose: PropTypes.func,
+	selectedValue: PropTypes.string,
+};
 
 class EnhancedTable extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            selected : {}
+            selected : {},
+            modalData: {selectedValue: " ", classifications: {}, fields: {}, values: {}},
+            open: false
         }
     }
 
@@ -51,6 +60,14 @@ class EnhancedTable extends React.Component {
             selected[key] = 1;
         }
         this.setState(selected)
+    };
+
+    handlePopupButtonClicked = (key, values, classifications, fields) => {
+        console.log(values[key].name)
+        this.setState({ open: !this.state.open }, console.log("Toggling modal", this.state.open)
+        );
+        this.setState({modalData: {selectedValue: values[key].name, classifications: classifications, fields: fields, values: values}})
+        console.log(this.state.selected);
     };
 
     tableHead(tableName){
@@ -65,7 +82,7 @@ class EnhancedTable extends React.Component {
         )
     }
 
-    tableBody(values){
+    tableBody(values, classifications, fields){
         return (
             <TableBody>
                 {Object.keys(values).map( key => (
@@ -74,7 +91,9 @@ class EnhancedTable extends React.Component {
                         onClick={() => this.handleSelectRow(key)}
                         selected={key in this.state.selected}
                     >
-                        <TableCell>{values[key].name}</TableCell>
+                        <TableCell>
+                            <Button color="primary" onClick={()=> this.handlePopupButtonClicked(key, values, classifications, fields)}> Pop </Button>
+                        {values[key].name}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>
@@ -96,10 +115,12 @@ class EnhancedTable extends React.Component {
     render(){
         return(
             <div style={styles.wrapper}>
+                <PopupModal onClose={this.toggleModal} open={this.state.open} modalData={this.state.modalData} >
+				</PopupModal> 
                 <Paper style={styles.paperContainer}>
                     <Table style={styles.table}>
                         {this.tableHead(this.props.name)}
-                        {this.tableBody(this.props.values)}
+                        {this.tableBody(this.props.values, this.props.classifications, this.props.fields)}
                     </Table>
                 </Paper>
                 {this.sendDataButton(this.props.callback)}

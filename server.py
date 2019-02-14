@@ -18,7 +18,8 @@ def test():
 
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
-	file = request.files['file']
+	file = request.files['file0']
+	print(request.files)
 	df = pd.read_csv(file)
 
 	resp = data_classifier(df)

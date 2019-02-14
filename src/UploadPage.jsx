@@ -2,32 +2,50 @@ import React, {Component} from 'react'
 import AnalysisPage from './AnalysisPage.jsx'
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import Dropzone from 'react-dropzone'
+import classNames from 'classnames'
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 const style = {
 	display: 'flex',
-    //backgroundImage: 'url("https://cdn.britannica.com/s:300x300/55/174255-004-9A4971E9.jpg")',
-    backgroundSize: 'cover',
-    width: '100%',
-    height: '100%',
     position: 'relative',
-    top: '25%',
+    top: '10%',
     justifyContent: 'center',
+    alignItems: 'center',
+}
+const drop = {
+	display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+}
+
+const input = {
+	backgroundColor: '#d7dbe2',
+	borderRadius: '10px'
 }
 
 class UploadPage extends Component{
 	constructor(props) {
     	super(props);
-    	this.handleUploadImage = this.handleUploadImage.bind(this);
-  	}
+    	this.file_names = []
+	    this.data = new FormData();
+	    this.counter = 0;
+	}
 
-	handleUploadImage(ev) {
-	    ev.preventDefault();
+	onDrop = (files) => {
+	    for(let file of files){
+	    	this.file_names.push(file.name)
+	    	this.data.append('file' + this.counter,file);
+	    	this.counter++;
+	    }
+	}
 
-	    const data = new FormData();
-	    data.append('file', this.uploadInput.files[0]);
-	    fetch('api/upload', {
+	uploadFiles = () => {
+		fetch('api/upload', {
 	      method: 'POST',
-	      body: data,
+	      body: this.data,
 	    }).then((response) => {
 	      response.json().then((body) => {
 	        this.props.handleData(body);
@@ -38,17 +56,35 @@ class UploadPage extends Component{
   	render() {
 	    return (
     		<div style={style}>
-	    	  Choose a csv file to analyze
-		      <form onSubmit={this.handleUploadImage}>
-		        <Button>
-		          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
-		        </Button>
-		        <br />
-		        <div>
-		          <button>Upload</button>
-		        </div>
-		      </form>	
-	     	</div>
+	    		<div style={drop}>
+			    	<Dropzone onDrop={this.onDrop}>
+			        	{({getRootProps, getInputProps, isDragActive}) => {
+			          		return (
+			            		<div style={input}
+			              		{...getRootProps()}
+			              		className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
+			            		>
+			              		<input {...getInputProps()} />
+			              		<div>
+			              			{
+				                	this.counter > 0 ?
+				                  		this.file_names.map(function(name, idx){
+		         							return (<p> {name}</p>)
+		       							}) 
+		       						:
+			                  			<p>Drag and drop or click to choose files.</p>
+			              			}
+			              		</div>
+			            		</div>
+			          		)
+			        	}}
+			      </Dropzone>
+			      <Button variant={"contained"}  color="primary" onClick={this.uploadFiles}>
+			      	Upload Files
+
+			      </Button>
+			    </div>
+	     </div>
 	    );
   	}
 } 

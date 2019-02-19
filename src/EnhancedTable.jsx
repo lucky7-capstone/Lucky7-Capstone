@@ -1,13 +1,13 @@
-import React from 'react'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
-import PopupModal from './PopupModal.jsx'
+import React from "react";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+import PopupModal from "./PopupModal.jsx";
 
 /////////////////////////////////////////////////////////////////////////////
 // The table for Classifications and fields share many of the same
@@ -15,119 +15,154 @@ import PopupModal from './PopupModal.jsx'
 // in one super class
 
 const styles = {
-    wrapper: {
-        margin: '25px',
-        height: '75vh',
-        width: '35vh'
-    },
-    table: {
-        minWidth: 300,
-    },
-    paperContainer: {
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        overflowY: 'auto',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    button: {
-        margin: '10px',
-    }
+  wrapper: {
+    margin: "25px",
+    height: "75vh",
+    width: "35vh"
+  },
+  table: {
+    minWidth: 300
+  },
+  paperContainer: {
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    overflowY: "auto",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  button: {
+    margin: "10px"
+  }
 };
-	  
+
 PopupModal.propTypes = {
-	onClose: PropTypes.func,
-	selectedValue: PropTypes.string,
+  onClose: PropTypes.func,
+  selectedValue: PropTypes.string
 };
 
 class EnhancedTable extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            selected : {},
-            modalData: {selectedValue: " ", classifications: {}, fields: {}, values: {}},
-            open: false
-        }
-    }
-
-    handleSelectRow = (key) => {
-        const selected = this.state.selected;
-        if (key in selected) {
-            delete selected[key]
-        } else {
-            selected[key] = 1;
-        }
-        this.setState(selected)
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: {},
+      modalData: {
+        selectedValue: " ",
+        classifications: {},
+        fields: {},
+        values: {}
+      },
+      open: false
     };
+  }
 
-    handlePopupButtonClicked = (key, values, classifications, fields) => {
-        console.log(values[key].name)
-        this.setState({ open: !this.state.open }, console.log("Toggling modal", this.state.open)
-        );
-        this.setState({modalData: {selectedValue: values[key].name, classifications: classifications, fields: fields, values: values}})
-        console.log(this.state.selected);
-    };
+  toggleModal = () => {
+    this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
+  }
 
-    tableHead(tableName){
-        return(
-            <TableHead>
-                <TableRow styles={{display: 'flex'}}>
-                    <TableCell>
-                        <h1>{tableName}</h1>
-                    </TableCell>
-                </TableRow>
-            </TableHead>
-        )
+  handleSelectRow = key => {
+    const selected = this.state.selected;
+    if (key in selected) {
+      delete selected[key];
+    } else {
+      selected[key] = 1;
     }
+    this.setState(selected);
+  };
 
-    tableBody(values, classifications, fields){
-        return (
-            <TableBody>
-                {Object.keys(values).map( key => (
-                    <TableRow
-                        hover
-                        onClick={() => this.handleSelectRow(key)}
-                        selected={key in this.state.selected}
-                    >
-                        <TableCell>
-                            <Button color="primary" onClick={()=> this.handlePopupButtonClicked(key, values, classifications, fields)}> Pop </Button>
-                        {values[key].name}</TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        )
-    }
+  handlePopupButtonClicked = (key, values, classifications, fields) => {
+    console.log(values[key].name);
+    console.log("CLASSES", classifications)
+    this.setState({
+      modalData: {
+        selectedValue: values[key].name,
+        classifications: classifications,
+        fields: fields,
+        values: values
+      }, 
+      open: !this.state.open
+    });
+  };
 
-    sendDataButton(callback){
-        return(
-            <Button style={styles.button}
-                    variant={"contained"}
-                    component={'span'}
-                    onClick={() => callback(this.state.selected)}
-            >
-                Send to WorkBench
-            </Button>
-        )
-    }
+  tableHead(tableName) {
+    return (
+      <TableHead>
+        <TableRow styles={{ display: "flex" }}>
+          <TableCell>
+            <h1>{tableName}</h1>
+          </TableCell>
+        </TableRow>
+      </TableHead>
+    );
+  }
 
-    render(){
-        return(
-            <div style={styles.wrapper}>
-                <PopupModal onClose={this.toggleModal} open={this.state.open} modalData={this.state.modalData} >
-				</PopupModal> 
-                <Paper style={styles.paperContainer}>
-                    <Table style={styles.table}>
-                        {this.tableHead(this.props.name)}
-                        {this.tableBody(this.props.values, this.props.classifications, this.props.fields)}
-                    </Table>
-                </Paper>
-                {this.sendDataButton(this.props.callback)}
-            </div>
-        )
-    }
+  tableBody(values, classifications, fields) {
+    return (
+      <TableBody classifications={classifications} fields={fields}>
+        {Object.keys(values).map(key => (
+          <TableRow
+            hover
+            onClick={() => this.handleSelectRow(key)}
+            selected={key in this.state.selected}
+          >
+            <TableCell>
+              <Button
+                color="primary"
+                onClick={() =>
+                  this.handlePopupButtonClicked(
+                    key,
+                    values,
+                    classifications,
+                    fields
+                  )
+                }
+              >
+                {" "}
+                Pop{" "}
+              </Button>
+              {values[key].name}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    );
+  }
 
+  sendDataButton(callback) {
+    return (
+      <Button
+        style={styles.button}
+        variant={"contained"}
+        component={"span"}
+        onClick={() => callback(this.state.selected)}
+      >
+        Send to WorkBench
+      </Button>
+    );
+  }
+
+  render() {
+    return (
+      <div style={styles.wrapper}>
+        <PopupModal
+          onClose={this.toggleModal}
+          open={this.state.open}
+          modalData={this.state.modalData}
+        />
+        <Paper style={styles.paperContainer}>
+          <Table style={styles.table}>
+            {this.tableHead(this.props.name)}
+            {this.tableBody(
+              this.props.values,
+              this.props.classifications,
+              this.props.fields
+            )}
+          </Table>
+        </Paper>
+        {this.sendDataButton(this.props.callback)}
+      </div>
+    );
+  }
 }
 
 export default EnhancedTable;

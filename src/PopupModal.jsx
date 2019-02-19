@@ -34,21 +34,24 @@ z-index: -1;
 `;
 
 const Modal = styled.div`
-    height: 60vh;
-    width: 10em;
     background: white;
     box-shadow: 0 0 30px rgba(0,0,0,0.2);
     border-radius: 12px;
     padding: 24px;
+    max-width: 28vw;
+    max-height: 36vh;
+    left: 15em;
+    right: 0;
+    bottom: 0;
+    top: 0;
 `;
 
 class PopupModal extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
-          open : false,
-          modalData : {selectedValue: " ", classifications: {}, fields: {}}
-		};
+          open : false
+    	};
     }
 
     openModal = () => {
@@ -66,17 +69,43 @@ class PopupModal extends Component {
     handleListItemClick = value => {
         this.props.onClose(value);
     };
+    
+    fieldValues(classifications, fields, selectedValue){
+        var values; 
+        var valueNames = new Array();
+        var valueBody = [];
+        var count = 0;
+        for (var classOpt in classifications) {
+            if (classifications[classOpt].name == selectedValue) {
+                values = classifications[classOpt].values
+                for (var value in values) {
+                    if (count == 3) {
+                        break
+                    } else {    
+                        valueNames.push(fields[value].name)
+                        valueBody.push( <Body> {fields[value].name} </Body> )
+                        count = count + 1;
+                    }    
+                }
+            }
+        }
+
+        return (
+          valueBody 
+        )
+      }
 
     render() {
         const { classes, onClose, selectedValue, ...other } = this.props;
-        console.log("printing data", this.state.modalData.classifications)
+        console.log("printing data classes: ", this.props.modalData.classifications)
+        console.log("printing data fields: ", this.props.modalData.fields)
         return (
           <Container open={this.props.open}>
             <Overlay className="overlay" onClick={this.props.onClose}/>
             <Modal>
                 {this.props.children}
-                <Header> {this.state.modalData.selectedValue} </Header>
-                hi
+                <Header> {this.props.modalData.selectedValue} </Header>
+                {this.fieldValues(this.props.modalData.classifications, this.props.modalData.fields, this.props.modalData.selectedValue)}
             </Modal>
           </Container>
         );

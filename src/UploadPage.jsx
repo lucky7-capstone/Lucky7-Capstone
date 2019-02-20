@@ -7,6 +7,12 @@ import classNames from 'classnames'
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const style = {
 	display: 'flex',
@@ -19,38 +25,56 @@ const drop = {
 	display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
+    width: '80%'
 }
 
 const input = {
 	backgroundColor: '#d7dbe2',
-	borderRadius: '10px'
+	borderRadius: '10px',
+	justifyContent: 'center',
+	alignItems: 'center',
+	display: 'flex',
 }
 
 class UploadPage extends Component{
 	constructor(props) {
     	super(props);
-    	this.file_names = []
-	    this.data = new FormData();
-	    this.counter = 0;
+	    this.state ={
+	    	file_names : {},
+	    };
 	}
 
 	onDrop = (files) => {
+		let file_names = this.state.file_names;
 	    for(let file of files){
-	    	this.file_names.push(file.name)
-	    	this.data.append('file' + this.counter,file);
-	    	this.counter++;
+	    	file_names[file.name] = file;
 	    }
+	    this.setState({
+	    	file_names : file_names,
+	    });
 	}
 
 	uploadFiles = () => {
+		let data = new FormData();
+		for(let file in this.state.file_names){
+			data.append(file,this.state.file_names[file]);
+		}
 		fetch('api/upload', {
 	      method: 'POST',
-	      body: this.data,
+	      body: data,
 	    }).then((response) => {
 	      response.json().then((body) => {
 	        this.props.handleData(body);
 	      });
 	    });
+	}
+
+	DelFile = (file) => {
+		let file_names = this.state.file_names;
+		delete file_names[file]	;
+		this.setState({
+			file_names : file_names
+		});
 	}
 
   	render() {
@@ -65,16 +89,26 @@ class UploadPage extends Component{
 			              		className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
 			            		>
 			              		<input {...getInputProps()} />
-			              		<div>
-			              			{
-				                	this.counter > 0 ?
-				                  		this.file_names.map(function(name, idx){
-		         							return (<p> {name}</p>)
-		       							}) 
-		       						:
-			                  			<p>Drag and drop or click to choose files.</p>
-			              			}
-			              		</div>
+				              		<div>
+				              			{
+					                	Object.keys(this.state.file_names).length > 0 ?
+
+					                		<List component="nav">
+					                			{Object.keys(this.state.file_names).map(function(name){
+			         								return (
+											        	<ListItem button key={name} onClick={(e) => {e.stopPropagation();this.DelFile(name)}}>
+											          		<ListItemIcon>
+											            		<DeleteIcon />
+											          		</ListItemIcon>
+											          		<ListItemText primary={name} />
+											        	</ListItem>
+			         								)
+			       								}.bind(this))}
+									        </List>
+			       						:
+				                  			<p>Drag and drop or click to choose files.</p>
+				              			}
+				              		</div>
 			            		</div>
 			          		)
 			        	}}

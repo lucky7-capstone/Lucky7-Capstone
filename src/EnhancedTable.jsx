@@ -43,6 +43,11 @@ class EnhancedTable extends React.Component {
         }
     }
 
+    clear = (callback) => {
+      callback(this.state.selected);
+      this.setState({ selected: {} })
+    };
+
     handleSelectRow = (key) => {
         const selected = this.state.selected;
         if (key in selected) {
@@ -72,6 +77,7 @@ class EnhancedTable extends React.Component {
                     <TableRow
                         hover
                         onClick={() => this.handleSelectRow(key)}
+                        key={key}
                         selected={key in this.state.selected}
                     >
                         <TableCell>{values[key].name}</TableCell>
@@ -86,7 +92,7 @@ class EnhancedTable extends React.Component {
             <Button style={styles.button}
                     variant={"contained"}
                     component={'span'}
-                    onClick={() => callback(this.state.selected)}
+                    onClick={() => this.clear(callback)}
             >
                 Send to WorkBench
             </Button>

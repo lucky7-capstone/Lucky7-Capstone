@@ -14,7 +14,8 @@ const styles = {
     width: '70vh',
     marginTop: '25px',
     marginBottom: '10px',
-    float: 'left'
+    float: 'left',
+    backgroundColor: 'whitesmoke'
   }
 };
 

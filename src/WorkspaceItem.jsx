@@ -31,7 +31,7 @@ class WorkspaceItem extends React.Component {
     return {
       display: 'flex',
       width: '100%',
-      opacity: this.state.selected ? '0.8' : '1',
+      boxShadow: this.state.selected ? '0px 0px 5px blue' : '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }
@@ -63,6 +63,7 @@ class WorkspaceItem extends React.Component {
         {Object.keys(values).map( key => (
           <TableRow
             hover
+            key={key}
             onClick={() => this.props.fieldCallback(key)}
           >
             <TableCell>{this.props.fields[key].name}</TableCell>

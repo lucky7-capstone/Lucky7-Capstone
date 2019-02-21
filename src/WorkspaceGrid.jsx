@@ -35,9 +35,10 @@ class WorkspaceGrid extends React.Component {
     return (
       <div style={styles.wrapper}>
         <div style={styles.workspaceStyle}>
-          <Grid container justify="left" spacing={24} wrap={'nowrap'}>
+          <Grid container spacing={24} wrap={'nowrap'}>
             {Object.keys(this.props.classifications).map( key => (
             <WorkspaceItem name={this.props.classifications[key].name}
+                           key={key}
                            values={this.props.classifications[key].values}
                            fields={this.props.fields}
                            classificationCallback = {() => this.props.addClassificationCallback(key)}
@@ -47,8 +48,7 @@ class WorkspaceGrid extends React.Component {
         </div>
         <Button variant={"contained"}
                 component={'span'}
-                onClick={this.props.removeClassificationCallback}
-        >
+                onClick={this.props.removeClassificationCallback}>
           Remove from Workbench
         </Button>
       </div>

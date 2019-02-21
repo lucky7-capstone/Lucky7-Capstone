@@ -22,9 +22,13 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import AnalysisPage from './AnalysisPage.jsx'
-import UploadPage from './UploadPage.jsx'
-import HomePage from './HomePage.jsx'
+import AnalysisPage from './AnalysisPage.jsx';
+import UploadPage from './UploadPage.jsx';
+import HomePage from './HomePage.jsx';
+import Button from '@material-ui/core/Button';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
+
 
 const drawerWidth = 240;
 
@@ -161,11 +165,14 @@ class Dashboard extends React.Component {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+
+            <Button variant="contained" color="default" className={classes.button}
+            href="https://github.com/lucky7-capstone/Lucky7-Capstone">
+              Github 
+              {/*<CloudUploadIcon className={classes.rightIcon} />*/}
+            </Button>
+
+
           </Toolbar>
         </AppBar>
         <Drawer

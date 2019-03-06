@@ -56,9 +56,14 @@ class EnhancedTable extends React.Component {
     };
   }
 
+  clear = (callback) => {
+    callback(this.state.selected);
+    this.setState({ selected: {} })
+  };
+
   toggleModal = () => {
     this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
-  }
+  };
 
   handleSelectRow = key => {
     const selected = this.state.selected;
@@ -72,7 +77,7 @@ class EnhancedTable extends React.Component {
 
   handlePopupButtonClicked = (key, values, classifications, fields) => {
     console.log(values[key].name);
-    console.log("CLASSES", classifications)
+    console.log("CLASSES", classifications);
     this.setState({
       modalData: {
         selectedValue: values[key].name,
@@ -84,7 +89,7 @@ class EnhancedTable extends React.Component {
     });
   };
 
-  tableHead(tableName) {
+  static tableHead(tableName) {
     return (
       <TableHead>
         <TableRow styles={{ display: "flex" }}>
@@ -103,6 +108,7 @@ class EnhancedTable extends React.Component {
           <TableRow
             hover
             onClick={() => this.handleSelectRow(key)}
+            key={key}
             selected={key in this.state.selected}
           >
             <TableCell>
@@ -134,7 +140,7 @@ class EnhancedTable extends React.Component {
         style={styles.button}
         variant={"contained"}
         component={"span"}
-        onClick={() => callback(this.state.selected)}
+        onClick={() => this.clear(callback)}
       >
         Send to WorkBench
       </Button>
@@ -151,7 +157,7 @@ class EnhancedTable extends React.Component {
         />
         <Paper style={styles.paperContainer}>
           <Table style={styles.table}>
-            {this.tableHead(this.props.name)}
+            {EnhancedTable.tableHead(this.props.name)}
             {this.tableBody(
               this.props.values,
               this.props.classifications,

@@ -31,9 +31,12 @@ class WorkspaceItem extends React.Component {
     return {
       display: 'flex',
       width: '100%',
-      opacity: this.state.selected ? '0.8' : '1',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundColor: this.state.selected ? '#BFEFFF' : 'white',
+      borderStyle: 'solid',
+      borderWidth: '3px',
+      borderColor: this.state.selected ? 'blue' : 'transparent'
     }
   }
 

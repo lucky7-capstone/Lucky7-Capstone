@@ -82,7 +82,12 @@ class EnhancedTable extends React.Component {
     this.setState(selected);
   };
 
-  handlePopupButtonClicked = (key, values, classifications, fields) => {
+  handleRightClick = ( click, key, values, classifications, fields ) => {
+    click.preventDefault();
+    this.handlePopup(key, values, classifications, fields);
+  }
+
+  handlePopup = ( key, values, classifications, fields) => {
     console.log(values[key].name);
     console.log("CLASSES", classifications);
     this.setState({
@@ -138,24 +143,17 @@ class EnhancedTable extends React.Component {
           <TableRow
             hover
             onClick={() => this.handleSelectRow(key)}
+            onContextMenu={(click) =>
+                this.handleRightClick(
+                    click,
+                    key,
+                    values,
+                    classifications,
+                    fields)}
             key={key}
             selected={key in this.state.selected}
           >
             <TableCell>
-              <Button
-                color="primary"
-                onClick={() =>
-                  this.handlePopupButtonClicked(
-                    key,
-                    values,
-                    classifications,
-                    fields
-                  )
-                }
-              >
-                {" "}
-                Pop{" "}
-              </Button>
               {values[key].name}
             </TableCell>
           </TableRow>

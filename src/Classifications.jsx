@@ -1,6 +1,21 @@
 import React from 'react';
 import EnhancedTable from './EnhancedTable.jsx'
 
+const sortMethods = (values) => {
+    return {
+      AlphabeticalD: function (a, b) {
+        return values[a].name > values[b].name ? 1 : (
+          values[a].name < values[b].name ? -1 : 0
+        )
+      },
+      AlphabeticalA: function (a, b) {
+        return values[a].name > values[b].name ? -1 : (
+          values[a].name < values[b].name ? 1 : 0
+        )
+      }
+    }
+};
+
 class Classifications extends React.Component {
 
     render(){
@@ -11,6 +26,7 @@ class Classifications extends React.Component {
                 fields={this.props.fields}
                 values={this.props.classifications}
                 callback={this.props.callback}
+                sortMethods={sortMethods}
             />
         )
     }

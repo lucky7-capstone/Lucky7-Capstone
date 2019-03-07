@@ -19,9 +19,19 @@ def test():
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
 	files = request.files.to_dict()
-	first_file =  list(files.keys())[0]
-	file = files[first_file]
-	df = pd.read_csv(file)
+
+	# first_file =  list(files.keys())[0]
+	# file = files[first_file]
+	# df = pd.read_csv(file)
+
+	df = pd.DataFrame()
+
+	for key in list(files.keys()):
+		temp = pd.read_csv(files[key])
+		df = pd.concat((df, temp), axis=1)
+
+	# for fname, file in files.items():
+	# 	df = pd.concat((df, pd.read_csv(file)), axis=1)
 
 	resp = data_classifier(df)
 	return json.dumps(resp)

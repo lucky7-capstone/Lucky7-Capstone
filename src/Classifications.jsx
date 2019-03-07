@@ -7,6 +7,8 @@ class Classifications extends React.Component {
         return (
             <EnhancedTable
                 name={"Classifications"}
+                classifications={this.props.classifications}
+                fields={this.props.fields}
                 values={this.props.classifications}
                 callback={this.props.callback}
             />

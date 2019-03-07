@@ -8,6 +8,11 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import PopupModal from "./PopupModal.jsx";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 /////////////////////////////////////////////////////////////////////////////
 // The table for Classifications and fields share many of the same
@@ -52,7 +57,8 @@ class EnhancedTable extends React.Component {
         fields: {},
         values: {}
       },
-      open: false
+      open: false,
+      sortMethod: 'alphabetical'
     };
   }
 
@@ -85,26 +91,57 @@ class EnhancedTable extends React.Component {
         fields: fields,
         values: values
       }, 
-      open: !this.state.open
+      open: !this.state.open,
     });
   };
 
-  static tableHead(tableName) {
+  tableHead(tableName) {
     return (
-      <TableHead>
-        <TableRow styles={{ display: "flex" }}>
-          <TableCell>
-            <h1>{tableName}</h1>
-          </TableCell>
-        </TableRow>
-      </TableHead>
+        <TableHead>
+          <TableRow styles={{ display: "flex" }}>
+            <TableCell>
+              <h1>{tableName}</h1>
+              <form autoComplete="off">
+                <FormControl>
+                  <InputLabel>Name</InputLabel>
+                  <Select
+                    value={this.state.sortMethod}
+                    onChange={this.updateSortMethod}
+                  >
+                    <MenuItem value={'hello'}>Ten</MenuItem>
+                    <MenuItem value={'bored'}>Twenty</MenuItem>
+                  </Select>
+                </FormControl>
+              </form>
+            </TableCell>
+          </TableRow>
+        </TableHead>
     );
   }
 
+  updateSortMethod = event => {
+    this.setState({ sortMethod: event.target.value });
+  };
+
+  getSortMethod = (values) => {
+      return function(a,b){
+        return values[a].name > values[b].name ? 1 : (
+          values[a].name < values[b].name ? -1 : 0
+        )
+      }
+  };
+
+  toList = (values, sortMethod) => {
+    let indices = Object.keys(values);
+    indices.sort(sortMethod);
+    return indices
+  };
+
   tableBody(values, classifications, fields) {
+    this.toList(values, function(a, b){return values[a] > values[b]})
     return (
       <TableBody classifications={classifications} fields={fields}>
-        {Object.keys(values).map(key => (
+        {this.toList(values, this.getSortMethod(values)).map(key => (
           <TableRow
             hover
             onClick={() => this.handleSelectRow(key)}
@@ -157,7 +194,7 @@ class EnhancedTable extends React.Component {
         />
         <Paper style={styles.paperContainer}>
           <Table style={styles.table}>
-            {EnhancedTable.tableHead(this.props.name)}
+            {this.tableHead(this.props.name)}
             {this.tableBody(
               this.props.values,
               this.props.classifications,

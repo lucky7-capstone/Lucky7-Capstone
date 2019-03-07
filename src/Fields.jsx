@@ -2,6 +2,7 @@ import React from 'react';
 import EnhancedTable from './EnhancedTable.jsx'
 
 class Fields extends React.Component {
+
   render() {
     return (
       <EnhancedTable

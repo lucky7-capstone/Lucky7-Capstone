@@ -11,7 +11,6 @@ import PopupModal from "./PopupModal.jsx";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -58,8 +57,10 @@ class EnhancedTable extends React.Component {
         values: {}
       },
       open: false,
-      sortMethod: 'alphabetical'
+      sortMethod: "Alphabetical",
+      methodsList: this.props.sortMethods(this.props.values)
     };
+    console.log(Object.keys(this.state.methodsList))
   }
 
   clear = (callback) => {
@@ -101,18 +102,19 @@ class EnhancedTable extends React.Component {
           <TableRow styles={{ display: "flex" }}>
             <TableCell>
               <h1>{tableName}</h1>
-              <form autoComplete="off">
-                <FormControl>
-                  <InputLabel>Name</InputLabel>
-                  <Select
-                    value={this.state.sortMethod}
-                    onChange={this.updateSortMethod}
-                  >
-                    <MenuItem value={'hello'}>Ten</MenuItem>
-                    <MenuItem value={'bored'}>Twenty</MenuItem>
-                  </Select>
-                </FormControl>
-              </form>
+                Sort by
+                  <form autoComplete="off">
+                    <FormControl>
+                      <Select
+                        value={this.state.sortMethod}
+                        onChange={this.updateSortMethod}
+                      >
+                        {Object.keys(this.state.methodsList).map(key => (
+                          <MenuItem value={key}>{key}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </form>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -123,14 +125,6 @@ class EnhancedTable extends React.Component {
     this.setState({ sortMethod: event.target.value });
   };
 
-  getSortMethod = (values) => {
-      return function(a,b){
-        return values[a].name > values[b].name ? 1 : (
-          values[a].name < values[b].name ? -1 : 0
-        )
-      }
-  };
-
   toList = (values, sortMethod) => {
     let indices = Object.keys(values);
     indices.sort(sortMethod);
@@ -138,10 +132,9 @@ class EnhancedTable extends React.Component {
   };
 
   tableBody(values, classifications, fields) {
-    this.toList(values, function(a, b){return values[a] > values[b]})
     return (
       <TableBody classifications={classifications} fields={fields}>
-        {this.toList(values, this.getSortMethod(values)).map(key => (
+        {this.toList(values, this.state.methodsList[this.state.sortMethod]).map(key => (
           <TableRow
             hover
             onClick={() => this.handleSelectRow(key)}

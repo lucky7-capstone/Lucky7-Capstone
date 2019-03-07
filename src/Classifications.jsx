@@ -12,6 +12,12 @@ const sortMethods = (values) => {
         return values[a].name > values[b].name ? -1 : (
           values[a].name < values[b].name ? 1 : 0
         )
+      },
+      SizeD: function(a, b) {
+        return Object.keys(values[a].values).length - Object.keys(values[b].values).length
+      },
+      SizeA: function(a, b) {
+        return Object.keys(values[b].values).length - Object.keys(values[a].values).length
       }
     }
 };

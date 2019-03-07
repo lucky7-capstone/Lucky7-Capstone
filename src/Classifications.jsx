@@ -1,6 +1,7 @@
 import React from 'react';
 import EnhancedTable from './EnhancedTable.jsx'
 
+// MAKE THIS ONLY DISPLAY NON-WORKBENCH CLASSIFICATIONS
 const sortMethods = (values) => {
     return {
       AlphabeticalD: function (a, b) {

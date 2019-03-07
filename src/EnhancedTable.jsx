@@ -11,6 +11,7 @@ import PopupModal from "./PopupModal.jsx";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -139,25 +140,30 @@ class EnhancedTable extends React.Component {
   tableBody(values, classifications, fields) {
     return (
       <TableBody classifications={classifications} fields={fields}>
-        {this.toList(values, this.state.methodsList[this.state.sortMethod]).map(key => (
-          <TableRow
-            hover
-            onClick={() => this.handleSelectRow(key)}
-            onContextMenu={(click) =>
-                this.handleRightClick(
-                    click,
-                    key,
-                    values,
-                    classifications,
-                    fields)}
-            key={key}
-            selected={key in this.state.selected}
-          >
-            <TableCell>
-              {values[key].name}
-            </TableCell>
-          </TableRow>
-        ))}
+        {this.toList(values, this.state.methodsList[this.state.sortMethod]).map(key => {
+          if (true) { //TODO check to see if this key is already in the workbench
+              return (<TableRow
+                  hover
+                  onClick={() => this.handleSelectRow(key)}
+                  onContextMenu={(click) =>
+                      this.handleRightClick(
+                          click,
+                          key,
+                          values,
+                          classifications,
+                          fields)}
+                  key={key}
+                  selected={key in this.state.selected}
+
+              >
+                  <TableCell>
+                      <Checkbox
+                          checked={key in this.state.selected}
+                      />
+                      {values[key].name}
+                  </TableCell>
+              </TableRow>)
+          }})}
       </TableBody>
     );
   }

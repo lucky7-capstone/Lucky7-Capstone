@@ -3,13 +3,15 @@ import EnhancedTable from './EnhancedTable.jsx'
 
 const sortMethods = (values) => {
     return {
-      Alphabetical: function (a, b) {
-          return values[a].name > values[b].name ? 1 : (
-            values[a].name < values[b].name ? -1 : 0
-          )
+      AlphabeticalD: function (a, b) {
+        return values[a].name > values[b].name ? 1 : (
+          values[a].name < values[b].name ? -1 : 0
+        )
       },
-      Other: function(a, b) {
-        return 0
+      AlphabeticalA: function (a, b) {
+        return values[a].name > values[b].name ? -1 : (
+          values[a].name < values[b].name ? 1 : 0
+        )
       }
     }
 };

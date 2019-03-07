@@ -12,9 +12,6 @@ const sortMethods = (values) => {
       return values[a].name > values[b].name ? -1 : (
         values[a].name < values[b].name ? 1 : 0
       )
-    },
-    Other: function(a, b) {
-      return 0
     }
   }
 };

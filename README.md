@@ -22,6 +22,11 @@ Use 'CTRL+SHIFT+R' to reload the page after making any changes.
 We are using Travis CI to build and test our software, here is the link to our most recent build: 
 https://travis-ci.com/kyle-maxwell/Lucky7-Capstone
 
+# Tests
+'npm test' will run all tests
+tests are defined in the '__tests__' folder and are saved as '<NAME>.test.js'
+We are using the [jest testing framework](https://jestjs.io/en/) with [enzyme](https://airbnb.io/enzyme/) for interacting with react components.
+
 # Additional Notes
 
 Ontology notes:

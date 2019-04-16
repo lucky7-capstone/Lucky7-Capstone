@@ -27,6 +27,7 @@ import UploadPage from './UploadPage.jsx';
 import HomePage from './HomePage.jsx';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SpinnerPage from './SpinnerPage.jsx'
 
 
 
@@ -238,7 +239,11 @@ class Dashboard extends React.Component {
 
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
-          {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
+          {this.state.page == "upload" && <UploadPage  
+            handleData={this.saveData} 
+            loadSpinner={() => this.setState({ page : "spinner"} )} 
+          />}
+          {this.state.page == "spinner" && <SpinnerPage />}
           {this.state.page == "analysis" && this.state.data != null &&  <AnalysisPage  data={this.state.data} />}
           {this.state.page == "home" && <HomePage />}
         </main>

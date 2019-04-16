@@ -47,7 +47,8 @@ def data_classifier(df):
 
 
 def dist(x, y): # computationally effcient euclidean distance
-    dist = np.sqrt(np.dot(x, x) - 2 * np.dot(x, y) + np.dot(y, y))
+    #dist = np.sqrt(np.dot(x, x) - 2 * np.dot(x, y) + np.dot(y, y))
+    dist = np.linalg.norm(x-y)
     return np.around(dist, 3)
 
 def mean_dist(DF, X): # TODO could use to order the classifications

@@ -67,7 +67,11 @@ class UploadPage extends Component{
 	      body: data,
 	    }).then((response) => {
 	      response.json().then((body) => {
-	        this.props.handleData(body);
+	      	if(body.error){
+	      		this.props.handleError(body.error);
+	      	}else{
+	        	this.props.handleData(body);
+	    	}
 	      });
 	    });
 	}

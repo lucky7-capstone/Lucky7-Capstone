@@ -241,6 +241,7 @@ class Dashboard extends React.Component {
           <div className={classes.appBarSpacer} />
           {this.state.page == "upload" && <UploadPage  
             handleData={this.saveData} 
+            handleError={(error) => {alert(error); this.setState({ page : "upload"} );} }
             loadSpinner={() => this.setState({ page : "spinner"} )} 
           />}
           {this.state.page == "spinner" && <SpinnerPage />}

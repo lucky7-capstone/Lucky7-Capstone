@@ -59,6 +59,9 @@ class UploadPage extends Component{
 		for(let file in this.state.file_names){
 			data.append(file,this.state.file_names[file]);
 		}
+
+		this.props.loadSpinner();
+
 		fetch('api/upload', {
 	      method: 'POST',
 	      body: data,

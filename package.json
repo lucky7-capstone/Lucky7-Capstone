@@ -1,17 +1,25 @@
 {
   "scripts": {
     "dev": "webpack --mode development",
-    "start": "webpack --mode development --watch"
+    "start": "webpack --mode development --watch",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "jest": "^24.7.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   },
@@ -23,8 +31,8 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-dropzone": "^8.1.0",
     "recharts": "^1.4.1",
-    "styled-components": "^4.1.3",
-    "react-dropzone": "^8.1.0"
+    "styled-components": "^4.1.3"
   }
 }

@@ -11,6 +11,7 @@ class Classifications extends React.Component {
                 fields={this.props.fields}
                 values={this.props.classifications}
                 callback={this.props.callback}
+		allowSendData={true}
             />
         )
     }

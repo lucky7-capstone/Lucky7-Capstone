@@ -59,12 +59,19 @@ class UploadPage extends Component{
 		for(let file in this.state.file_names){
 			data.append(file,this.state.file_names[file]);
 		}
+
+		this.props.loadSpinner();
+
 		fetch('api/upload', {
 	      method: 'POST',
 	      body: data,
 	    }).then((response) => {
 	      response.json().then((body) => {
-	        this.props.handleData(body);
+	      	if(body.error){
+	      		this.props.handleError(body.error);
+	      	}else{
+	        	this.props.handleData(body);
+	    	}
 	      });
 	    });
 	}

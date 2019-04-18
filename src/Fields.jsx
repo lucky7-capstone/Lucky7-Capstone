@@ -10,7 +10,7 @@ class Fields extends React.Component {
           fields={this.props.fields}
           values={this.props.fields}
           callback={this.props.callback}
-	  allowSendData={false}
+	  allowSendData={true}
       />
     );
               }

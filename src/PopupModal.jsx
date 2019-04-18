@@ -102,7 +102,12 @@ class PopupModal extends Component {
                 var valTable = classifications[classOpt].values
                 for (var value in valTable) {
                     if (value == fieldID) {
-                        valueBody.push(<Body> {classifications[classOpt].name} {valTable[value]} </Body> )
+                        var valueBack = valTable[value]
+                        if (isNaN(valueBack)){
+                            valueBody.push(<Body> {classifications[classOpt].name} null </Body> )
+                         } else{
+                            valueBody.push(<Body> {classifications[classOpt].name} {valTable[value]} </Body> )
+                         }
                     }
                 }
             }

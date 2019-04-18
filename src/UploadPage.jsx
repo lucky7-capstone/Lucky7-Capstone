@@ -73,7 +73,7 @@ class UploadPage extends Component{
 	        	this.props.handleData(body);
 	    	}
 	      });
-	    });
+			});
 	}
 
 	DelFile = (file) => {

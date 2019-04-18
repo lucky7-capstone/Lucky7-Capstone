@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open : true,
+      open : false,
       page : "home",
       data : null
     };

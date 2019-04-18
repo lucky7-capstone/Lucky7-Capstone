@@ -128,17 +128,19 @@ class EnhancedTable extends React.Component {
     );
   }
 
-  sendDataButton(callback) {
-    return (
-      <Button
-        style={styles.button}
-        variant={"contained"}
-        component={"span"}
-        onClick={() => callback(this.state.selected)}
-      >
-        Send to WorkBench
-      </Button>
-    );
+  sendDataButton(callback, allow) {
+    if (allow) {
+	    return (
+	      <Button
+		style={styles.button}
+		variant={"contained"}
+		component={"span"}
+		onClick={() => callback(this.state.selected)}
+	      >
+		Send to WorkBench
+	      </Button>
+	    );
+    }
   }
 
   render() {
@@ -159,7 +161,7 @@ class EnhancedTable extends React.Component {
             )}
           </Table>
         </Paper>
-        {this.sendDataButton(this.props.callback)}
+        {this.sendDataButton(this.props.callback, this.props.allowSendData)}
       </div>
     );
   }

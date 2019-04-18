@@ -134,6 +134,10 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
+  start = () => {
+    this.setState({ page : "upload" });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -240,7 +244,7 @@ class Dashboard extends React.Component {
           <div className={classes.appBarSpacer} />
           {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
           {this.state.page == "analysis" && this.state.data != null &&  <AnalysisPage  data={this.state.data} />}
-          {this.state.page == "home" && <HomePage />}
+          {this.state.page == "home" && <HomePage start={this.start}/>}
         </main>
         
       </div>

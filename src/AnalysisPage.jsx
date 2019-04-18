@@ -18,6 +18,7 @@ class AnalysisPage extends React.Component {
   constructor(props){
     super(props);
     console.log(this.props.data);
+    this.props.setAnalysisToVisible()
     this.state = {
       classifications : this.props.data.Classifications,
       fields : this.props.data.Fields,

@@ -6,7 +6,7 @@ Using our data workbench is quite simple!
 2. Select 'Upload' on the left-hand side
 3. Click 'drag and drop or select to upload'
 4. Select a dataset.  You can find example datasets in this github repo under /ML/Ames/
-5. Click 'Upload Files'
+5. Click 'Start File Analysis'
 6. You will be routed to the Analysis page
 7. Click on Classifications that you want to edit
 8. Click send to workbench

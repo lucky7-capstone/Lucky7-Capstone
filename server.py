@@ -19,6 +19,10 @@ def test():
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
 	files = request.files.to_dict()
+
+	if (len(list(files.keys())) == 0) :
+		return json.dumps({'error' : "Please select a file to analyze before uploading."})
+
 	first_file =  list(files.keys())[0]
 	file = files[first_file]
 	try:

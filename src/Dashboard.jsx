@@ -27,6 +27,7 @@ import UploadPage from './UploadPage.jsx';
 import HomePage from './HomePage.jsx';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SpinnerPage from './SpinnerPage.jsx'
 
 
 
@@ -112,7 +113,8 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open : true,
+      open : false,
+      disableAnalysis: true,
       page : "home",
       data : null
     };
@@ -132,6 +134,14 @@ class Dashboard extends React.Component {
 
   handleDrawerClose = () => {
     this.setState({ open: false });
+  };
+
+  start = () => {
+    this.setState({ page : "upload" });
+  };
+
+  setAnalysisToVisible = () => {
+    this.setState({ disableAnalysis: false });
   };
 
   render() {
@@ -202,7 +212,7 @@ class Dashboard extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Upload"/>
               </ListItem>
-              <ListItem button onClick={() => this.setState({ page : "analysis"} )}>
+              <ListItem disabled={this.state.disableAnalysis} button onClick={() => this.setState({ page : "analysis"} )}>
                 <ListItemIcon>
                   <LayersIcon />
                 </ListItemIcon>
@@ -238,9 +248,17 @@ class Dashboard extends React.Component {
 
         <main className={classes.main}>
           <div className={classes.appBarSpacer} />
-          {this.state.page == "upload" && <UploadPage  handleData={this.saveData} />}
-          {this.state.page == "analysis" && this.state.data != null &&  <AnalysisPage  data={this.state.data} />}
-          {this.state.page == "home" && <HomePage />}
+          {this.state.page == "upload" && <UploadPage  
+            handleData={this.saveData} 
+            handleError={(error) => {alert(error); this.setState({ page : "upload"} );} }
+            loadSpinner={() => this.setState({ page : "spinner"})}
+            setAnalysisToVisible={this.setAnalysisToVisible} 
+          />}
+          {this.state.page == "spinner" && <SpinnerPage />}
+          {this.state.page == "analysis" && this.state.data != null && <AnalysisPage
+            setAnalysisToVisible={this.setAnalysisToVisible}
+            data={this.state.data} />}
+          {this.state.page == "home" && <HomePage start={this.start}/>}
         </main>
         
       </div>

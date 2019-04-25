@@ -27,6 +27,14 @@ const styles = ({
 });
 
 class HomePage extends React.Component{
+    
+    constructor(props) {
+        super(props);
+    }
+
+    start = () => {
+        this.props.start();
+    }
 
     render(){
         return(
@@ -39,7 +47,7 @@ class HomePage extends React.Component{
                 </h2>
 
                 <div>
-                    <Button variant="contained" color="secondary">
+                    <Button variant="contained" color="secondary" onClick={this.start}>
         	            Start
                     </Button>
                 </div>

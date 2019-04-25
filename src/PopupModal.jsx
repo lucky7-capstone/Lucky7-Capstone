@@ -70,11 +70,12 @@ class PopupModal extends Component {
         this.props.onClose(value);
     };
     
-    fieldValues(classifications, fields, selectedValue){
+    fieldValues(classifications, fields, selectedValue, values){
         var values; 
         var valueNames = new Array();
         var valueBody = [];
         var count = 0;
+        if (values == classifications) {
         for (var classOpt in classifications) {
             if (classifications[classOpt].name == selectedValue) {
                 values = classifications[classOpt].values
@@ -89,6 +90,28 @@ class PopupModal extends Component {
                 }
             }
         }
+        } else {
+            var fieldID = ""
+            for (var field in fields) {
+                if (fields[field].name == selectedValue) {
+                    var fieldID = field 
+                }
+            }
+
+            for (var classOpt in classifications) {
+                var valTable = classifications[classOpt].values
+                for (var value in valTable) {
+                    if (value == fieldID) {
+                        var valueBack = valTable[value]
+                        if (isNaN(valueBack)){
+                            valueBody.push(<Body> {classifications[classOpt].name} null </Body> )
+                         } else{
+                            valueBody.push(<Body> {classifications[classOpt].name} {valTable[value]} </Body> )
+                         }
+                    }
+                }
+            }
+        }
 
         return (
           valueBody 
@@ -97,15 +120,14 @@ class PopupModal extends Component {
 
     render() {
         const { classes, onClose, selectedValue, ...other } = this.props;
-        console.log("printing data classes: ", this.props.modalData.classifications)
-        console.log("printing data fields: ", this.props.modalData.fields)
+    
         return (
           <Container open={this.props.open}>
             <Overlay className="overlay" onClick={this.props.onClose}/>
             <Modal>
                 {this.props.children}
                 <Header> {this.props.modalData.selectedValue} </Header>
-                {this.fieldValues(this.props.modalData.classifications, this.props.modalData.fields, this.props.modalData.selectedValue)}
+                {this.fieldValues(this.props.modalData.classifications, this.props.modalData.fields, this.props.modalData.selectedValue, this.props.modalData.values)}
             </Modal>
           </Container>
         );

@@ -58,7 +58,7 @@ class UploadPage extends Component{
 		let data = new FormData();
 
 		if (this.state.file_names.length == 0) {
-			this.props.handleError(body.error);	
+			this.props.handleError("No Files Upload");	
 		}
 
 		for(let file in this.state.file_names){

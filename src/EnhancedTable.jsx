@@ -8,6 +8,11 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import PopupModal from "./PopupModal.jsx";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 /////////////////////////////////////////////////////////////////////////////
 // The table for Classifications and fields share many of the same
@@ -52,13 +57,21 @@ class EnhancedTable extends React.Component {
         fields: {},
         values: {}
       },
-      open: false
+      open: false,
+      sortMethod: "AlphabeticalD",
+      methodsList: this.props.sortMethods(this.props.values)
     };
+    console.log(Object.keys(this.state.methodsList))
   }
+
+  clear = (callback) => {
+    callback(this.state.selected);
+    this.setState({ selected: {} })
+  };
 
   toggleModal = () => {
     this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
-  }
+  };
 
   handleSelectRow = key => {
     const selected = this.state.selected;
@@ -70,9 +83,14 @@ class EnhancedTable extends React.Component {
     this.setState(selected);
   };
 
-  handlePopupButtonClicked = (key, values, classifications, fields) => {
+  handleRightClick = ( click, key, values, classifications, fields ) => {
+    click.preventDefault();
+    this.handlePopup(key, values, classifications, fields);
+  }
+
+  handlePopup = ( key, values, classifications, fields) => {
     console.log(values[key].name);
-    console.log("CLASSES", classifications)
+    console.log("CLASSES", classifications);
     this.setState({
       modalData: {
         selectedValue: values[key].name,
@@ -80,50 +98,72 @@ class EnhancedTable extends React.Component {
         fields: fields,
         values: values
       }, 
-      open: !this.state.open
+      open: !this.state.open,
     });
   };
 
   tableHead(tableName) {
     return (
-      <TableHead>
-        <TableRow styles={{ display: "flex" }}>
-          <TableCell>
-            <h1>{tableName}</h1>
-          </TableCell>
-        </TableRow>
-      </TableHead>
+        <TableHead>
+          <TableRow styles={{ display: "flex" }}>
+            <TableCell>
+              <h1>{tableName}</h1>
+                Sort by
+                  <form autoComplete="off">
+                    <FormControl>
+                      <Select
+                        value={this.state.sortMethod}
+                        onChange={this.updateSortMethod}
+                      >
+                        {Object.keys(this.state.methodsList).map(key => (
+                          <MenuItem value={key}>{key}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </form>
+            </TableCell>
+          </TableRow>
+        </TableHead>
     );
   }
+
+  updateSortMethod = event => {
+    this.setState({ sortMethod: event.target.value });
+  };
+
+  toList = (values, sortMethod) => {
+    let indices = Object.keys(values);
+    indices.sort(sortMethod);
+    return indices
+  };
 
   tableBody(values, classifications, fields) {
     return (
       <TableBody classifications={classifications} fields={fields}>
-        {Object.keys(values).map(key => (
-          <TableRow
-            hover
-            onClick={() => this.handleSelectRow(key)}
-            selected={key in this.state.selected}
-          >
-            <TableCell>
-              <Button
-                color="primary"
-                onClick={() =>
-                  this.handlePopupButtonClicked(
-                    key,
-                    values,
-                    classifications,
-                    fields
-                  )
-                }
+        {this.toList(values, this.state.methodsList[this.state.sortMethod]).map(key => {
+          if (true) { //TODO check to see if this key is already in the workbench
+              return (<TableRow
+                  hover
+                  onClick={() => this.handleSelectRow(key)}
+                  onContextMenu={(click) =>
+                      this.handleRightClick(
+                          click,
+                          key,
+                          values,
+                          classifications,
+                          fields)}
+                  key={key}
+                  selected={key in this.state.selected}
+
               >
-                {" "}
-                Pop{" "}
-              </Button>
-              {values[key].name}
-            </TableCell>
-          </TableRow>
-        ))}
+                  <TableCell>
+                      <Checkbox
+                          checked={key in this.state.selected}
+                      />
+                      {values[key].name}
+                  </TableCell>
+              </TableRow>)
+          }})}
       </TableBody>
     );
   }

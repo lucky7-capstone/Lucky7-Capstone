@@ -14,7 +14,8 @@ const styles = {
     width: '70vh',
     marginTop: '25px',
     marginBottom: '10px',
-    float: 'left'
+    float: 'left',
+    backgroundColor: 'whitesmoke'
   }
 };
 
@@ -35,11 +36,12 @@ class WorkspaceGrid extends React.Component {
     return (
       <div style={styles.wrapper}>
         <div style={styles.workspaceStyle}>
-          <Grid container justify="left" spacing={24} wrap={'nowrap'}>
+          <Grid container spacing={24} wrap={'nowrap'}>
             {Object.keys(this.props.classifications).map( key => (
             <WorkspaceItem name={this.props.classifications[key].name}
                            values={this.props.classifications[key].values}
                            fields={this.props.fields}
+                           key={key}
                            classificationCallback = {() => this.props.addClassificationCallback(key)}
                            fieldCallback = {(event) => this.props.fieldCallback(key, event)}/>
           ))}

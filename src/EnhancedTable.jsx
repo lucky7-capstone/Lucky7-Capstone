@@ -58,7 +58,7 @@ class EnhancedTable extends React.Component {
         values: {}
       },
       open: false,
-      sortMethod: "AlphabeticalD",
+      sortMethod: "A-z",
       methodsList: this.props.sortMethods(this.props.values)
     };
     console.log(Object.keys(this.state.methodsList))

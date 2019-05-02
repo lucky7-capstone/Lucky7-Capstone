@@ -4,20 +4,20 @@ import EnhancedTable from './EnhancedTable.jsx'
 // MAKE THIS ONLY DISPLAY NON-WORKBENCH CLASSIFICATIONS
 const sortMethods = (values) => {
     return {
-      AlphabeticalD: function (a, b) {
+      "A-z": function (a, b) {
         return values[a].name > values[b].name ? 1 : (
           values[a].name < values[b].name ? -1 : 0
         )
       },
-      AlphabeticalA: function (a, b) {
+      "Z-a": function (a, b) {
         return values[a].name > values[b].name ? -1 : (
           values[a].name < values[b].name ? 1 : 0
         )
       },
-      SizeD: function(a, b) {
+      "Size (Asc.)": function(a, b) {
         return Object.keys(values[a].values).length - Object.keys(values[b].values).length
       },
-      SizeA: function(a, b) {
+      "Size (Desc.)": function(a, b) {
         return Object.keys(values[b].values).length - Object.keys(values[a].values).length
       }
     }

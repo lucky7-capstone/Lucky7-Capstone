@@ -19,8 +19,6 @@ def test():
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
 	files = request.files.to_dict()
-	print(files)
-
 	# MULTI FILE
 	# first_file =  list(files.keys())[0]
 	# file = files[first_file]
@@ -28,7 +26,7 @@ def upload_file():
 	try:
 		files = list(files.values())
 		seq = [pd.read_csv(file) for file in files]
-		df = pd.concat(seq, axis=1)
+		df = pd.concat(seq, axis=0)
 		#df = pd.read_csv(file)
 	except Exception as e:
 		return json.dumps({'error' : "Unable to open CSV. Are you sure it's a CSV?"})
@@ -38,7 +36,6 @@ def upload_file():
 		return json.dumps(resp)
 	except Exception as e:
 		print(e)
-		return json.dumps({'error' : "Unable to analyze CSV."})
-   	
+		return json.dumps({'error' : "Unable to analyze CSV."})	
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT', 3000), debug=True)

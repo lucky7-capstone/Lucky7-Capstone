@@ -19,10 +19,10 @@ def test():
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
 	files = request.files.to_dict()
-	# MULTI FILE
-	# first_file =  list(files.keys())[0]
-	# file = files[first_file]
 
+  if (len(list(files.keys())) == 0) :
+		return json.dumps({'error' : "Please select a file to analyze before uploading."})
+  
 	try:
 		files = list(files.values())
 		seq = [pd.read_csv(file) for file in files]

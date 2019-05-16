@@ -8,26 +8,27 @@ from sklearn.cluster import KMeans
 
 
 def data_classifier(df):
-	arr1 = df.columns.values
-	arr2 = df.columns.values
+	arr = df.columns.values
 
 	NL = NormalizedLevenshtein()
-	vectors = pd.DataFrame([[NL.distance(i, j) for j in arr2] for i in arr1])
+	vectors = pd.DataFrame([[NL.distance(i, j) for j in arr] for i in arr])
 
-	clusters = 4
+	clusters =  int(len(arr) ** .5)
+	if clusters <= 1:
+		clusters = 2
 	kmeans = KMeans(n_clusters=clusters, random_state=0).fit(vectors)
 
 	uncert = pd.DataFrame()
 	for i in range(clusters):
 	    uncert[i] = vectors.apply(dist, args=(kmeans.cluster_centers_[i], ), axis=0)
-	uncert = uncert.set_index(arr1)
+	uncert = uncert.set_index(arr)
 
 
 	classifications_obj = {}
 	fields_obj = {}
 	for i in range(clusters):
 	    cluster = {}
-	    fields = pd.Series(arr1[kmeans.labels_==i])
+	    fields = pd.Series(arr[kmeans.labels_==i])
 	    for field_name in fields:
 	        field_id = "field-" + str(uuid.uuid4())
 	        cluster[field_id] = uncert.loc[field_name][i]

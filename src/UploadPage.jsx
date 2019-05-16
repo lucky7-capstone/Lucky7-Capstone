@@ -56,6 +56,11 @@ class UploadPage extends Component{
 
 	uploadFiles = () => {
 		let data = new FormData();
+
+		if (this.state.file_names.length == 0) {
+			this.props.handleError("No Files Upload");	
+		}
+
 		for(let file in this.state.file_names){
 			data.append(file,this.state.file_names[file]);
 		}
@@ -121,7 +126,7 @@ class UploadPage extends Component{
 			        	}}
 			      </Dropzone>
 			      <Button variant={"contained"}  color="primary" onClick={this.uploadFiles}>
-			      	Upload Files
+			      	Start File Analysis
 
 			      </Button>
 			    </div>

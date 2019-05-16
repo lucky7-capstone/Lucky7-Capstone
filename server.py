@@ -14,36 +14,33 @@ def index():
 
 @app.route("/api/test")
 def test():
-	return json.dumps("TEST")
+    return json.dumps("TEST")
 
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
-	files = request.files.to_dict()
-	print(files)
+    files = request.files.to_dict()
 
-	# MULTI FILE
-	# first_file =  list(files.keys())[0]
-	# file = files[first_file]
+    if (len(list(files.keys())) == 0):
+        return json.dumps({'error' : "Please select a file to analyze before uploading."})
 
-	try:
-		print(list(files.values()))
+    try:
+        values = []
+        sources = []
+        for file in list(files.values()):
+            df = pd.read_csv(file)
+            fields = list(df.columns.values)
+            values.extend(fields)
+            sources.extend([file.name for field in fields])
 
-		values = []
-		for file in list(files.values()):
-			df = pd.read_csv(file)
-			values.extend(list(df.columns.values))
+    except Exception as e:
+        return json.dumps({'error' : "Unable to open CSV. Are you sure it's a CSV?"})
 
-		print(values)
+    try:
+        resp = data_classifier(values, sources)
+        return json.dumps(resp)
+    except Exception as e:
+        print(e)
+        return json.dumps({'error' : "Unable to analyze CSV."}) 
 
-	except Exception as e:
-		return json.dumps({'error' : "Unable to open CSV. Are you sure it's a CSV?"})
-
-	try:
-		resp = data_classifier(values)
-		return json.dumps(resp)
-	except Exception as e:
-		print(e)
-		return json.dumps({'error' : "Unable to analyze CSV."})
-   	
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT', 3000), debug=True)

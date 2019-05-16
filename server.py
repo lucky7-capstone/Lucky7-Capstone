@@ -26,15 +26,20 @@ def upload_file():
 	# file = files[first_file]
 
 	try:
-		files = list(files.values())
-		seq = [pd.read_csv(file) for file in files]
-		df = pd.concat(seq, axis=1)
-		#df = pd.read_csv(file)
+		print(list(files.values()))
+
+		values = []
+		for file in list(files.values()):
+			df = pd.read_csv(file)
+			values.extend(list(df.columns.values))
+
+		print(values)
+
 	except Exception as e:
 		return json.dumps({'error' : "Unable to open CSV. Are you sure it's a CSV?"})
 
 	try:
-		resp = data_classifier(df)
+		resp = data_classifier(values)
 		return json.dumps(resp)
 	except Exception as e:
 		print(e)

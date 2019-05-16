@@ -18,6 +18,7 @@ def test():
 
 @app.route('/api/upload', methods = ['POST'])
 def upload_file():
+
     files = request.files.to_dict()
 
     if (len(list(files.keys())) == 0):

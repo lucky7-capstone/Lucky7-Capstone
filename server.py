@@ -37,6 +37,7 @@ def upload_file():
 
     try:
         resp = data_classifier(values, sources)
+        # print(resp)
         return json.dumps(resp)
     except Exception as e:
         print(e)

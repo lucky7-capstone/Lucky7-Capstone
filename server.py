@@ -20,7 +20,7 @@ def test():
 def upload_file():
 	files = request.files.to_dict()
 
-  if (len(list(files.keys())) == 0) :
+	if (len(list(files.keys())) == 0) :
 		return json.dumps({'error' : "Please select a file to analyze before uploading."})
   
 	try:

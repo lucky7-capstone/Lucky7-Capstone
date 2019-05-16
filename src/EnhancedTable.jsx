@@ -121,6 +121,7 @@ class EnhancedTable extends React.Component {
                       </Select>
                     </FormControl>
                   </form>
+	    {this.addClassificationButton(null, this.props.classButton)}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -178,6 +179,21 @@ class EnhancedTable extends React.Component {
 		onClick={() => callback(this.state.selected)}
 	      >
 		Send to WorkBench
+	      </Button>
+	    );
+    }
+  }
+
+  addClassificationButton(callback, allow) {
+    if (allow) {
+	    return (
+	      <Button
+		style={styles.button}
+		variant={"contained"}
+		component={"span"}
+		onClick={() => callback()}
+	      >
+		Add Classification
 	      </Button>
 	    );
     }

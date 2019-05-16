@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,8 @@ class EnhancedTable extends React.Component {
       },
       open: false,
       sortMethod: "A-z",
-      methodsList: this.props.sortMethods(this.props.values)
+      methodsList: this.props.sortMethods(this.props.values),
+      enterClassName: false
     };
     console.log(Object.keys(this.state.methodsList))
   }
@@ -121,7 +123,8 @@ class EnhancedTable extends React.Component {
                       </Select>
                     </FormControl>
                   </form>
-	    {this.addClassificationButton(null, this.props.classButton)}
+	    {this.addClassificationButton(this.props.classButton)}
+	    {this.classTextField(null)}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -184,19 +187,36 @@ class EnhancedTable extends React.Component {
     }
   }
 
-  addClassificationButton(callback, allow) {
+  addClassificationButton(allow) {
     if (allow) {
 	    return (
 	      <Button
 		style={styles.button}
 		variant={"contained"}
 		component={"span"}
-		onClick={() => callback()}
+		onClick={this.toggleClassTextField}
 	      >
 		Add Classification
 	      </Button>
 	    );
     }
+  }
+
+  toggleClassTextField(){
+    this.setState({enterClassName: !this.state.enterClassName});
+    console.log(this.state.enterClassName);
+  }
+
+  classTextField(callback){
+   if(this.state.enterClassName){
+	  return(
+		<TextField
+		  id="classification"
+		  label="Enter Classification Name"
+		  margin="normal"
+		  variant="outlined"
+		/>);
+   }
   }
 
   render() {

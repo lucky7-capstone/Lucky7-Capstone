@@ -134,25 +134,6 @@ https://travis-ci.com/kyle-maxwell/Lucky7-Capstone
 tests are defined in the '__tests__' folder and are saved as '<NAME>.test.js'
 We are using the [jest testing framework](https://jestjs.io/en/) with [enzyme](https://airbnb.io/enzyme/) for interacting with react components.
 
-# Additional Notes
-
-Ontology notes:
-Categories can be grouped into Groupings which can then then be Classified.
-
-
-# Machine Learning 
-
-Field Clustering Metrics:
-1. Levenshtein Distance for Field Names
-2. GloVe Word embeddings of Field Names
-
-Data Clustering Metrics:
-1. Averaged Trigram Similarty of multiple data entries
-2. Data Entry Information Entropy & Metadata
-3. 1-D Bidirectional ConvNet for pattern embedding
-
-Siamese Neural Network with Tripplet Loss
-
 
 # Data Structures
 

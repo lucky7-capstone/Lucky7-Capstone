@@ -27,7 +27,8 @@ class Fields extends React.Component {
           values={this.props.fields}
           callback={this.props.callback}
           sortMethods={sortMethods}
-	        allowSendData={true}
+	  allowSendData={true}
+	  classButton={false}
       />
     );
               }

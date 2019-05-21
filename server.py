@@ -28,12 +28,13 @@ def upload_file():
         values = []
         sources = []
         for file in list(files.values()):
-            df = pd.read_csv(file)
+            df = pd.read_csv(file, encoding='latin-1')
             fields = list(df.columns.values)
             values.extend(fields)
             sources.extend([file.name for field in fields])
 
     except Exception as e:
+        print(e)
         return json.dumps({'error' : "Unable to open CSV. Are you sure it's a CSV?"})
 
     try:

@@ -194,7 +194,7 @@ class EnhancedTable extends React.Component {
 		style={styles.button}
 		variant={"contained"}
 		component={"span"}
-		onClick={this.toggleClassTextField}
+		onClick={() => this.toggleClassTextField(this)}
 	      >
 		Add Classification
 	      </Button>
@@ -202,9 +202,9 @@ class EnhancedTable extends React.Component {
     }
   }
 
-  toggleClassTextField(){
-    this.setState({enterClassName: !this.state.enterClassName});
-    console.log(this.state.enterClassName);
+  toggleClassTextField(table){
+    console.log(table);
+    table.setState({enterClassName: true});
   }
 
   classTextField(callback){

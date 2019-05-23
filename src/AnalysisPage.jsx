@@ -18,7 +18,6 @@ class AnalysisPage extends React.Component {
 
   constructor(props){
     super(props);
-    console.log(this.props.data);
     this.props.setAnalysisToVisible()
     this.state = {
       classifications : this.props.data.Classifications,
@@ -36,7 +35,6 @@ class AnalysisPage extends React.Component {
         delete selected[key]
     }
     selected[key] = this.state.classifications[key];
-    console.log(selected);
     this.setState({
       selectedWorkspaceClassifications : selected
     });

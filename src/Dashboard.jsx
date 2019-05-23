@@ -28,7 +28,7 @@ import HomePage from './HomePage.jsx';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import SpinnerPage from './SpinnerPage.jsx'
-import UnderDevelopmentPopup from './UnderDevelopmentPopup.jsx'
+import UnderDevelopment from './UnderDevelopment.jsx'
 
 
 
@@ -156,7 +156,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className={classes.root}>
-        <UnderDevelopmentPopup
+        <UnderDevelopment
             onClose={this.undeDevToggle}
             open={this.state.underDevOpen}
         />

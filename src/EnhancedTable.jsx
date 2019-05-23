@@ -7,7 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
-import PopupModal from "./PopupModal.jsx";
+import ItemView from "./ItemView.jsx";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -42,7 +42,7 @@ const styles = {
   }
 };
 
-PopupModal.propTypes = {
+ItemView.propTypes = {
   onClose: PropTypes.func,
   selectedValue: PropTypes.string
 };
@@ -239,7 +239,7 @@ class EnhancedTable extends React.Component {
   render() {
     return (
       <div style={styles.wrapper}>
-        <PopupModal
+        <ItemView
           onClose={this.toggleModal}
           open={this.state.open}
           modalData={this.state.modalData}

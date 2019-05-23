@@ -27,7 +27,9 @@ import UploadPage from './UploadPage.jsx';
 import HomePage from './HomePage.jsx';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import SpinnerPage from './SpinnerPage.jsx'
+import SpinnerPage from './SpinnerPage.jsx';
+import FileSaver from 'file-saver';
+
 
 
 
@@ -107,7 +109,6 @@ const styles = theme => ({
 });
 
 
-
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -121,8 +122,13 @@ class Dashboard extends React.Component {
   }
 
   saveData = (data) => {
+    try {
+      data = JSON.parse(data)
+    } catch(err){
+      
+    }
     this.setState({
-      data: JSON.parse(data),
+      data: data,
       page: "analysis"
     });
    // console.log(data);
@@ -143,6 +149,12 @@ class Dashboard extends React.Component {
   setAnalysisToVisible = () => {
     this.setState({ disableAnalysis: false });
   };
+
+  saveJSON = (json) => {
+    var blob = new Blob([JSON.stringify(json)], {type:"application/json;charset=utf-8"});
+    FileSaver.saveAs(blob, "ontology.json");
+  };
+
 
   render() {
     const { classes } = this.props;
@@ -236,12 +248,12 @@ class Dashboard extends React.Component {
                 </ListItemIcon>
                 <ListItemText primary="Ontology B" />
               </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Ontology C" />
-              </ListItem>
+              {this.state.page == "analysis" && this.state.data != null && this.state.open &&
+                <ListItem button>
+                  <Button name='download_button' variant="contained" color="default" className={classes.button} onClick={() => this.saveJSON(this.state.data)}> Download Ontology
+                  </Button>
+                </ListItem>
+              }
             </div>  
           </List>
         </Drawer>

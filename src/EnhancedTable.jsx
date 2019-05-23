@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -59,9 +60,14 @@ class EnhancedTable extends React.Component {
       },
       open: false,
       sortMethod: "A-z",
-      methodsList: this.props.sortMethods(this.props.values)
+      methodsList: this.props.sortMethods(this.props.values),
+      enterClassName: false,
+        textField: ""
     };
     console.log(Object.keys(this.state.methodsList))
+      this.handleChange = this.handleChange.bind(this);
+      this.textFieldSubmit = this.textFieldSubmit.bind(this);
+      this.toggleClassTextField = this.toggleClassTextField.bind(this);
   }
 
   clear = (callback) => {
@@ -121,6 +127,8 @@ class EnhancedTable extends React.Component {
                       </Select>
                     </FormControl>
                   </form>
+	    {this.addClassificationButton(this.props.classButton)}
+	    {this.classTextField()}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -183,6 +191,51 @@ class EnhancedTable extends React.Component {
     }
   }
 
+  addClassificationButton(allow) {
+    if (allow) {
+	    return (
+	      <Button
+		style={styles.button}
+		variant={"contained"}
+		component={"span"}
+		onClick={() => this.toggleClassTextField(this)}
+	      >
+		Add Classification
+	      </Button>
+	    );
+    }
+  }
+
+  toggleClassTextField(){
+    this.setState({enterClassName: true});
+  }
+
+  classTextField(){
+   if(this.state.enterClassName){
+	  return(
+	      <form onSubmit={this.textFieldSubmit}>
+            <TextField
+              id="classification"
+              label="Enter Classification Name"
+              margin="normal"
+              variant="outlined"
+              value={this.state.textField}
+              onChange={this.handleChange}
+            />
+          </form>);
+   }
+  }
+
+  textFieldSubmit(event){
+    event.preventDefault();
+    this.props.addClassification(this.state.textField);
+    this.setState({enterClassName: false, textField: ""});
+  }
+
+    handleChange(event) {
+        this.setState({textField: event.target.value});
+    }
+
   render() {
     return (
       <div style={styles.wrapper}>
@@ -197,7 +250,7 @@ class EnhancedTable extends React.Component {
             {this.tableBody(
               this.props.values,
               this.props.classifications,
-              this.props.fields
+              this.props.fields,
             )}
           </Table>
         </Paper>

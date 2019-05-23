@@ -29,7 +29,7 @@ import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import SpinnerPage from './SpinnerPage.jsx';
 import FileSaver from 'file-saver';
-
+import UnderDevelopmentPopup from './UnderDevelopmentPopup.jsx'
 
 
 
@@ -117,8 +117,10 @@ class Dashboard extends React.Component {
       open : false,
       disableAnalysis: true,
       page : "home",
-      data : null
+      data : null,
+        underDevOpen: false
     };
+    this.underDevToggle = this.underDevToggle.bind(this);
   }
 
   saveData = (data) => {
@@ -155,12 +157,19 @@ class Dashboard extends React.Component {
     FileSaver.saveAs(blob, "ontology.json");
   };
 
+  underDevToggle(){
+    this.setState({underDevOpen: !this.state.underDevOpen});
+  }
 
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
+        <UnderDevelopmentPopup
+            onClose={this.undeDevToggle}
+            open={this.state.underDevOpen}
+        />
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -189,8 +198,8 @@ class Dashboard extends React.Component {
             </Typography>
 
             <Button variant="contained" color="default" className={classes.button}
-            href="https://github.com/lucky7-capstone/Lucky7-Capstone">
-              Github 
+            href="https://lucky7-1.gitbook.io/lucky7/">
+              Help
               {/*<CloudUploadIcon className={classes.rightIcon} />*/}
             </Button>
 
@@ -236,13 +245,13 @@ class Dashboard extends React.Component {
           <List>
             <div>
               <ListSubheader inset>Saved Ontologies</ListSubheader>
-              <ListItem button>
+              <ListItem button onClick={this.underDevToggle}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Ontology A" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={this.underDevToggle}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>

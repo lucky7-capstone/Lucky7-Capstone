@@ -34,7 +34,9 @@ class Classifications extends React.Component {
                 values={this.props.classifications}
                 callback={this.props.callback}
                 sortMethods={sortMethods}
-		            allowSendData={true}
+                allowSendData={true}
+		        classButton={true}
+                addClassification={this.props.addClassification}
             />
         )
     }

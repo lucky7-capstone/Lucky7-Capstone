@@ -189,7 +189,7 @@ class Dashboard extends React.Component {
 
             <Button variant="contained" color="default" className={classes.button}
             href="https://lucky7-1.gitbook.io/lucky7/">
-              GitBook
+              Help
               {/*<CloudUploadIcon className={classes.rightIcon} />*/}
             </Button>
 

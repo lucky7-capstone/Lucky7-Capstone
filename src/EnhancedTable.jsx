@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -162,18 +164,31 @@ class EnhancedTable extends React.Component {
                           fields)}
                   key={key}
                   selected={key in this.state.selected}
-
               >
                   <TableCell>
                       <Checkbox
                           checked={key in this.state.selected}
                       />
+
+                      {key in classifications && 
+                        <IconButton 
+                          aria-label="Delete" 
+                          onClick={() => this.deleteClassification(key, classifications)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+
                       {values[key].name}
                   </TableCell>
               </TableRow>)
           }})}
       </TableBody>
     );
+  }
+
+  deleteClassification(key, classifications) {
+      this.handleSelectRow(key)
+      delete classifications[key]
   }
 
   sendDataButton(callback, allow) {

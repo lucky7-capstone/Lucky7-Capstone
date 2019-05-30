@@ -70,7 +70,7 @@ class PopupModal extends Component {
         this.props.onClose(value);
     };
     
-    fieldValues(classifications, fields, selectedValue, values){
+    fieldValues(classifications, fields, selectedValue, values, key){
         var values; 
         var valueNames = new Array();
         var valueBody = [];
@@ -94,7 +94,7 @@ class PopupModal extends Component {
             var fieldID = ""
             for (var field in fields) {
                 if (fields[field].name == selectedValue) {
-                    var fieldID = field 
+                    var fieldID = field                
                 }
             }
 
@@ -103,6 +103,7 @@ class PopupModal extends Component {
                 for (var value in valTable) {
                     if (value == fieldID) {
                         var valueBack = valTable[value]
+                        valueBody.push(<Body> source: {values[key].source} </Body>)
                         if (isNaN(valueBack)){
                             valueBody.push(<Body> {classifications[classOpt].name} null </Body> )
                          } else{
@@ -127,7 +128,7 @@ class PopupModal extends Component {
             <Modal>
                 {this.props.children}
                 <Header> {this.props.modalData.selectedValue} </Header>
-                {this.fieldValues(this.props.modalData.classifications, this.props.modalData.fields, this.props.modalData.selectedValue, this.props.modalData.values)}
+                {this.fieldValues(this.props.modalData.classifications, this.props.modalData.fields, this.props.modalData.selectedValue, this.props.modalData.values, this.props.modalData.key)}
             </Modal>
           </Container>
         );

@@ -56,7 +56,8 @@ class EnhancedTable extends React.Component {
         selectedValue: " ",
         classifications: {},
         fields: {},
-        values: {}
+        values: {},
+        key: ""
       },
       open: false,
       sortMethod: "A-z",
@@ -76,7 +77,7 @@ class EnhancedTable extends React.Component {
   };
 
   toggleModal = () => {
-    this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
+    this.setState({open: !this.state.open})
   };
 
   handleSelectRow = key => {
@@ -95,14 +96,13 @@ class EnhancedTable extends React.Component {
   }
 
   handlePopup = ( key, values, classifications, fields) => {
-    console.log(values[key].name);
-    console.log("CLASSES", classifications);
     this.setState({
       modalData: {
         selectedValue: values[key].name,
         classifications: classifications,
         fields: fields,
-        values: values
+        values: values,
+        key: key
       }, 
       open: !this.state.open,
     });

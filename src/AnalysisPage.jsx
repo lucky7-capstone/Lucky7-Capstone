@@ -2,6 +2,7 @@ import React from 'react';
 import Classifications from './Classifications.jsx'
 import Fields from './Fields.jsx'
 import WorkspaceGrid from "./WorkspaceGrid.jsx";
+import uuid from "uuid";
 
 const styles = {
   analysisPageStyle: {
@@ -17,7 +18,6 @@ class AnalysisPage extends React.Component {
 
   constructor(props){
     super(props);
-    console.log(this.props.data);
     this.props.setAnalysisToVisible()
     this.state = {
       classifications : this.props.data.Classifications,
@@ -25,6 +25,8 @@ class AnalysisPage extends React.Component {
       workspaceClassifications : {},
       selectedWorkspaceClassifications : {}
     }
+
+    this.addClassification = this.addClassification.bind(this);
   }
 
   addWorkspaceClassifications = (key) => {
@@ -33,7 +35,6 @@ class AnalysisPage extends React.Component {
         delete selected[key]
     }
     selected[key] = this.state.classifications[key];
-    console.log(selected);
     this.setState({
       selectedWorkspaceClassifications : selected
     });
@@ -85,12 +86,26 @@ class AnalysisPage extends React.Component {
     })
   };
 
+  addClassification(className){
+    const newClassList = this.state.classifications;
+    const cid = 'classification-' + uuid.v4();
+    newClassList[cid] = {
+            name: className,
+            metadata: {},
+            values: {}};
+    this.setState({classifications:  newClassList});
+  }
+
 
 	render() {
     const { classifications, fields } = this.state;
 		return (
 			<div style={styles.analysisPageStyle}>
-			      <Classifications classifications={classifications} fields={fields} callback={this.handleClassificationsExport}/>
+			      <Classifications
+                      classifications={classifications}
+                      fields={fields}
+                      callback={this.handleClassificationsExport}
+                      addClassification={this.addClassification}/>
 			      <Fields classifications={classifications} fields={fields} callback={this.handleFieldsExport} />
 			      <WorkspaceGrid classifications={this.state.workspaceClassifications}
                            fields={fields}

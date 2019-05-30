@@ -27,7 +27,9 @@ import UploadPage from './UploadPage.jsx';
 import HomePage from './HomePage.jsx';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import SpinnerPage from './SpinnerPage.jsx'
+import SpinnerPage from './SpinnerPage.jsx';
+import FileSaver from 'file-saver';
+import UnderDevelopmentPopup from './UnderDevelopmentPopup.jsx'
 
 
 
@@ -107,7 +109,6 @@ const styles = theme => ({
 });
 
 
-
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -116,13 +117,20 @@ class Dashboard extends React.Component {
       open : false,
       disableAnalysis: true,
       page : "home",
-      data : null
+      data : null,
+        underDevOpen: false
     };
+    this.underDevToggle = this.underDevToggle.bind(this);
   }
 
   saveData = (data) => {
+    try {
+      data = JSON.parse(data)
+    } catch(err){
+      
+    }
     this.setState({
-      data: JSON.parse(data),
+      data: data,
       page: "analysis"
     });
    // console.log(data);
@@ -144,11 +152,24 @@ class Dashboard extends React.Component {
     this.setState({ disableAnalysis: false });
   };
 
+  saveJSON = (json) => {
+    var blob = new Blob([JSON.stringify(json)], {type:"application/json;charset=utf-8"});
+    FileSaver.saveAs(blob, "ontology.json");
+  };
+
+  underDevToggle(){
+    this.setState({underDevOpen: !this.state.underDevOpen});
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
+        <UnderDevelopmentPopup
+            onClose={this.undeDevToggle}
+            open={this.state.underDevOpen}
+        />
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -178,7 +199,7 @@ class Dashboard extends React.Component {
 
             <Button variant="contained" color="default" className={classes.button}
             href="https://lucky7-1.gitbook.io/lucky7/">
-              GitBook
+              Help
               {/*<CloudUploadIcon className={classes.rightIcon} />*/}
             </Button>
 
@@ -224,24 +245,24 @@ class Dashboard extends React.Component {
           <List>
             <div>
               <ListSubheader inset>Saved Ontologies</ListSubheader>
-              <ListItem button>
+              <ListItem button onClick={this.underDevToggle}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Ontology A" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={this.underDevToggle}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Ontology B" />
               </ListItem>
-              <ListItem button>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Ontology C" />
-              </ListItem>
+              {this.state.page == "analysis" && this.state.data != null && this.state.open &&
+                <ListItem button>
+                  <Button name='download_button' variant="contained" color="default" className={classes.button} onClick={() => this.saveJSON(this.state.data)}> Download Ontology
+                  </Button>
+                </ListItem>
+              }
             </div>  
           </List>
         </Drawer>

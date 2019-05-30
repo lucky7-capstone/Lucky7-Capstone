@@ -56,14 +56,19 @@ class EnhancedTable extends React.Component {
         selectedValue: " ",
         classifications: {},
         fields: {},
-        values: {}
+        values: {},
+        key: ""
       },
       open: false,
       sortMethod: "A-z",
       methodsList: this.props.sortMethods(this.props.values),
-      enterClassName: false
+      enterClassName: false,
+        textField: ""
     };
     console.log(Object.keys(this.state.methodsList))
+      this.handleChange = this.handleChange.bind(this);
+      this.textFieldSubmit = this.textFieldSubmit.bind(this);
+      this.toggleClassTextField = this.toggleClassTextField.bind(this);
   }
 
   clear = (callback) => {
@@ -72,7 +77,7 @@ class EnhancedTable extends React.Component {
   };
 
   toggleModal = () => {
-    this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
+    this.setState({open: !this.state.open})
   };
 
   handleSelectRow = key => {
@@ -91,14 +96,13 @@ class EnhancedTable extends React.Component {
   }
 
   handlePopup = ( key, values, classifications, fields) => {
-    console.log(values[key].name);
-    console.log("CLASSES", classifications);
     this.setState({
       modalData: {
         selectedValue: values[key].name,
         classifications: classifications,
         fields: fields,
-        values: values
+        values: values,
+        key: key
       }, 
       open: !this.state.open,
     });
@@ -124,7 +128,7 @@ class EnhancedTable extends React.Component {
                     </FormControl>
                   </form>
 	    {this.addClassificationButton(this.props.classButton)}
-	    {this.classTextField(null)}
+	    {this.classTextField()}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -202,22 +206,35 @@ class EnhancedTable extends React.Component {
     }
   }
 
-  toggleClassTextField(table){
-    console.log(table);
-    table.setState({enterClassName: true});
+  toggleClassTextField(){
+    this.setState({enterClassName: true});
   }
 
-  classTextField(callback){
+  classTextField(){
    if(this.state.enterClassName){
 	  return(
-		<TextField
-		  id="classification"
-		  label="Enter Classification Name"
-		  margin="normal"
-		  variant="outlined"
-		/>);
+	      <form onSubmit={this.textFieldSubmit}>
+            <TextField
+              id="classification"
+              label="Enter Classification Name"
+              margin="normal"
+              variant="outlined"
+              value={this.state.textField}
+              onChange={this.handleChange}
+            />
+          </form>);
    }
   }
+
+  textFieldSubmit(event){
+    event.preventDefault();
+    this.props.addClassification(this.state.textField);
+    this.setState({enterClassName: false, textField: ""});
+  }
+
+    handleChange(event) {
+        this.setState({textField: event.target.value});
+    }
 
   render() {
     return (
@@ -233,7 +250,7 @@ class EnhancedTable extends React.Component {
             {this.tableBody(
               this.props.values,
               this.props.classifications,
-              this.props.fields
+              this.props.fields,
             )}
           </Table>
         </Paper>

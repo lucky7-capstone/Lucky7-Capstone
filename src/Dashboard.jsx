@@ -166,7 +166,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className={classes.root}>
-        <UnderDevelopmentPopup
+        <UnderDevelopment
             onClose={this.undeDevToggle}
             open={this.state.underDevOpen}
         />

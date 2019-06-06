@@ -46,7 +46,7 @@ const Modal = styled.div`
     top: 0;
 `;
 
-class UnderDevelopmentPopup extends Component {
+class UnderDevelopment extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
@@ -75,13 +75,12 @@ class UnderDevelopmentPopup extends Component {
           <Container open={this.props.open}>
             <Overlay className="overlay" onClick={this.props.onClose}/>
             <Modal>
-                <h2>This feature is under development!</h2>
-                <p>Please check back later!</p>
-                <p>Click the button again to remove this message</p>
+                <Header> {this.props.head} </Header>
+                <body> {this.props.interior} </body>
             </Modal>
           </Container>
         );
       }
 }
 
-export default UnderDevelopmentPopup;
+export default UnderDevelopment;

@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -56,7 +58,8 @@ class EnhancedTable extends React.Component {
         selectedValue: " ",
         classifications: {},
         fields: {},
-        values: {}
+        values: {},
+        key: ""
       },
       open: false,
       sortMethod: "A-z",
@@ -76,7 +79,7 @@ class EnhancedTable extends React.Component {
   };
 
   toggleModal = () => {
-    this.setState({open: !this.state.open}, console.log("Toggling modal", this.state.open))
+    this.setState({open: !this.state.open})
   };
 
   handleSelectRow = key => {
@@ -95,14 +98,13 @@ class EnhancedTable extends React.Component {
   }
 
   handlePopup = ( key, values, classifications, fields) => {
-    console.log(values[key].name);
-    console.log("CLASSES", classifications);
     this.setState({
       modalData: {
         selectedValue: values[key].name,
         classifications: classifications,
         fields: fields,
-        values: values
+        values: values,
+        key: key
       }, 
       open: !this.state.open,
     });
@@ -162,18 +164,31 @@ class EnhancedTable extends React.Component {
                           fields)}
                   key={key}
                   selected={key in this.state.selected}
-
               >
                   <TableCell>
                       <Checkbox
                           checked={key in this.state.selected}
                       />
+
+                      {key in classifications && 
+                        <IconButton 
+                          aria-label="Delete" 
+                          onClick={() => this.deleteClassification(key, classifications)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+
                       {values[key].name}
                   </TableCell>
               </TableRow>)
           }})}
       </TableBody>
     );
+  }
+
+  deleteClassification(key, classifications) {
+      this.handleSelectRow(key)
+      delete classifications[key]
   }
 
   sendDataButton(callback, allow) {

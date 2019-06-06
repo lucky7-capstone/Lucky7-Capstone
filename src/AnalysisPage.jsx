@@ -31,10 +31,11 @@ class AnalysisPage extends React.Component {
 
   addWorkspaceClassifications = (key) => {
     const selected = this.state.selectedWorkspaceClassifications;
-    if (this.state.classifications[key] in selected) {
-        delete selected[key]
+    if (key in selected) {
+        delete selected[key];
+    } else {
+    	selected[key] = this.state.classifications[key];
     }
-    selected[key] = this.state.classifications[key];
     this.setState({
       selectedWorkspaceClassifications : selected
     });

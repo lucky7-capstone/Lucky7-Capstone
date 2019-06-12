@@ -1,3 +1,5 @@
+[More Info](https://lucky7-1.gitbook.io/lucky7/)
+
 # Wiki for End users
 
 Using our data workbench is quite simple!

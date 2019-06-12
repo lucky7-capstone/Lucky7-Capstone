@@ -1,11 +1,13 @@
-[More Info](https://lucky7-1.gitbook.io/lucky7/)
+# Data Classification Workbench
+Our workbench, developed as part of our Software Engineering Capstone.
+Please visit our [detailed wiki](https://lucky7-1.gitbook.io/lucky7/)
 
 # Wiki for End users
 
 Using our data workbench is quite simple!
 
 1. Go to http://ec2-52-55-161-116.compute-1.amazonaws.com:3000/ in your web browser
-2. Select 'Upload' on the left-hand side
+2. Select 'Upload' on the left-hand sideInfo
 3. Click 'drag and drop or select to upload'
 4. Select a dataset.  You can find example datasets in this github repo under /ML/Ames/
 5. Click 'Start File Analysis'
